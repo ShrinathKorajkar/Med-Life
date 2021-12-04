@@ -46,9 +46,16 @@
       </div>
     </header>
     <main class="d-grid p-2">
-      <div class="d-grid align-self-center gap-4 col-6 mx-auto">
-        <a class="btn btn-success btn-lg" role="button" href="records.html">USER</a>
-        <a class="btn btn-info btn-lg" role="button" href="doctor.html">DOCTOR</a>
+      <div class="d-grid align-self-center gap-4 col-8 mx-auto">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">DOCTOR ID :</span>
+            <input type="text" class="form-control" placeholder="eg : BEG9543210" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">PASSWORD :</span>
+            <input type="password" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">SUBMIT</button>
       </div> 
     </main>
   </body>
