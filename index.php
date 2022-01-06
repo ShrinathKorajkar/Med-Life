@@ -5,12 +5,9 @@ $username = "root";
 $password = "";
 $database = "medlifedb";
 
-$conn = mysqli_connect($server, $username, $password, $database);
+$conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn){
   die("Error connecting");
-}
-else{
-  echo "Connection established";
 }
 ?>
 
@@ -59,7 +56,7 @@ else{
       <div class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-secondary bg-gradient">
           <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Home</a>
+            <a class="navbar-brand" href="index.php">Home</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -73,7 +70,7 @@ else{
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="sign_in.html">Register</a>
+                  <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">help</a>
@@ -96,8 +93,8 @@ else{
                     <div class="card-body p-4 text-black">
                       <div class="d-grid align-self-center col-md-6 gap-4 mx-auto">
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">CHOOSE YOUR OPTION</h5>
-                        <a class="btn btn-success btn-lg" role="button" href="user.html">USER</a>
-                        <a class="btn btn-info btn-lg" role="button" href="doctor.html">DOCTOR</a>
+                        <a class="btn btn-success btn-lg" role="button" href="user.php">USER</a>
+                        <a class="btn btn-info btn-lg" role="button" href="doctor.php">DOCTOR</a>
                       </div>
                     </div>
                   </div>

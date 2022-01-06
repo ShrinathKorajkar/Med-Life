@@ -32,7 +32,7 @@
 
     <title>Med Life</title>
   </head>
-  <body class="bg-warning bg-opacity-10 user">
+  <body class="bg-warning bg-opacity-10 doc">
     <header>
       <div class="container-fluid" style="background-color: white;">
         <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
@@ -40,7 +40,7 @@
       <div class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-secondary bg-gradient">
           <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Home</a>
+            <a class="navbar-brand" href="index.php">Home</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -61,36 +61,41 @@
         </nav>
       </div>
     </header>
-    <main class="d-grid p-2">
+    <main>
       <section>
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-              <div class="card" style="border-radius: 1rem;">
-                <div class="row g-0">
-                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                    <div class="card-body p-4 p-lg-5 text-black">
-                      <form>
-                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-                        <div class="input-group flex-nowrap">
-                          <span class="input-group-text" id="addon-wrapping">USER ID :</span>
-                          <input type="text" required class="form-control" placeholder="aadhaar no " maxlength="12" minlength="12" aria-label="Username" aria-describedby="addon-wrapping">
-                        </div>
-                        <div class="pt-3 mb-4">
-                          <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
-                        </div>
-                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="sign_in.html" style="color: #393f81;">Register here</a></p>
-                      </form>
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div class="card-body p-4 p-lg-5 text-black">
+                    <form>
+                      <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                      <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">DOCTOR ID :</span>
+                        <input type="text" class="form-control" pattern=".{10,10}" required placeholder="eg : BEG9543210" aria-label="Username" aria-describedby="addon-wrapping">
                     </div>
+                    <div class="input-group pt-3 flex-nowrap">
+                        <span class="input-group-text"  id="addon-wrapping">PASSWORD :</span>
+                        <input type="password" class="form-control" minlength="4" required aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
+                      <div class="pt-3 mb-4">
+                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                      </div>
+                      <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="sign_in.php" style="color: #393f81;">Register here</a></p>
+                      
+                    </form>
+    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
     </main>
-    
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
