@@ -2,38 +2,26 @@
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $showAlert = false;
 
-  // include 'partials/_dbconnect.php';
+  include 'index.php';
   $name = $_POST["name"];
   $aadhaar = $_POST["aadhaar"];
-  $age =$_POST["age"];
+  $age = $_POST["age"];
   $bloodgroup = $_POST["bloodgroup"];
   $birthdayDate = $_POST["birthdayDate"];
   $gender = $_POST["gender"];
+  $phoneNumber = $_POST["phoneNumber"];
+  $emergency = $_POST["emergency"];
   
   
-  $sql=
-
-
-
-
-
-
+  $sql1="INSERT INTO `user` (`AADHAR_NO`, `USERNAME`) VALUES ('$aadhaar', '$name');";
+  $sql="INSERT INTO `p_details` (`AADHAR_NO`, `AGE`, `BLOOD_GRP`, `DOB`, `CONTACT_NO`, `ECONTACT_NO`, `GENDER`) VALUES ('$aadhaar', '$age', '$bloodgroup', '$birthdayDate', '$phoneNumber', '$emergency', '$gender');";
+  $result = mysqli_query($conn, $sql);
+  $result1 = mysqli_query($conn, $sql1);
+  if ($result && $result1){
+    $showAlert = true;
+  }
+}
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -69,6 +57,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Med Life</title>
   </head>
   <body class="bg-warning bg-opacity-10 sign_in">
+ 
+         </div>
     <header>
       <div class="container-fluid" style="background-color: white;">
         <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
@@ -129,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                       <div class="col-md-6 mb-4">
       
                         <div class="form-outline">
-                          <input type="number" id="age" name="number" min="1" max="150" required class="form-control form-control-lg" />
+                          <input type="number" id="age" name="age" min="1" max="150" required class="form-control form-control-lg" />
                           <label class="form-label" for="age">Age</label>
                         </div>
       
@@ -139,14 +129,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                           <div class="form-outline">
                             <select class="form-select form-select-lg" id="bloodgroup" name="bloodgroup" aria-label=".form-select-lg example">
                               <option selected><h6 class="fs-6"> Select</h6></option>
-                              <option value="1">A +ve</option>
-                              <option value="2">A -ve</option>
-                              <option value="3">B +ve</option>
-                              <option value="4">B -ve</option>>
-                              <option value="5">AB +ve</option>
-                              <option value="6">AB -ve</option>>
-                              <option value="7">O +ve</option>
-                              <option value="7">O -ve</option>
+                              <option value="A+">A +ve</option>
+                              <option value="A-">A -ve</option>
+                              <option value="B+">B +ve</option>
+                              <option value="B-">B -ve</option>>
+                              <option value="AB+">AB +ve</option>
+                              <option value="AB-">AB -ve</option>>
+                              <option value="O+">O +ve</option>
+                              <option value="O-">O -ve</option>
                             </select>
                             <label class="form-label" for="bloodgroup">Blood Group</label>
                           </div>
@@ -206,13 +196,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="row">
                       <div class="col-md-6 mb-4 pb-2">
                         <div class="form-outline">
-                          <input type="tel" id="phoneNumber" required class="form-control form-control-lg" />
+                          <input type="tel" id="phoneNumber" name="phoneNumber" required class="form-control form-control-lg" />
                           <label class="form-label" for="phoneNumber">Phone Number</label>
                         </div>
                       </div>
                       <div class="col-md-6 mb-4 pb-2">
                         <div class="form-outline">
-                          <input type="tel" id="emergency" required class="form-control form-control-lg" />
+                          <input type="tel" id="emergency" name="emergency" required class="form-control form-control-lg" />
                           <label class="form-label" for="emergency">Emergency Phone no</label>
                         </div>
                       </div>
