@@ -28,7 +28,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="assets/stylesheet.css" />
 
     <title>Med Life</title>
   </head>
@@ -68,7 +68,7 @@
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
                   <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 text-decoration-underline"><center> Registration Form</center></h2>
-                  <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">General Information</h5>
+                  <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Enter Your Details</h5>
                   <form>
       
                     <div class="row">
@@ -76,23 +76,49 @@
       
                         <div class="form-outline">
                           <input type="text" id="firstName" required class="form-control form-control-lg" />
-                          <label class="form-label" for="firstName">First Name</label>
+                          <label class="form-label" for="firstName">Name</label>
                         </div>
       
                       </div>
+                        <div class="col-md-6 mb-4">
+        
+                          <div class="form-outline">
+                            <input type="tel" id="aadhaar" required class="form-control form-control-lg" maxlength="12" minlength="12"/>
+                            <label class="form-label" for="aadhaar">Aadhaar no</label>
+                          </div>
+        
+                        </div>
+                    </div>
+                    <div class="row">
                       <div class="col-md-6 mb-4">
       
                         <div class="form-outline">
-                          <input type="text" id="lastName" required class="form-control form-control-lg" />
-                          <label class="form-label" for="lastName">Last Name</label>
+                          <input type="number" id="age" min="1" max="150" required class="form-control form-control-lg" />
+                          <label class="form-label" for="age">Age</label>
                         </div>
       
                       </div>
+                        <div class="col-md-6 mb-4">
+        
+                          <div class="form-outline">
+                            <select class="form-select form-select-lg" id="bloodgroup" aria-label=".form-select-lg example">
+                              <option selected><h6 class="fs-6"> Select</h6></option>
+                              <option value="1">A +ve</option>
+                              <option value="2">A -ve</option>
+                              <option value="3">B +ve</option>
+                              <option value="4">B -ve</option>>
+                              <option value="5">AB +ve</option>
+                              <option value="6">AB -ve</option>>
+                              <option value="7">O +ve</option>
+                              <option value="7">O -ve</option>
+                            </select>
+                            <label class="form-label" for="bloodgroup">Blood Group</label>
+                          </div>
+        
+                        </div>
                     </div>
-      
                     <div class="row">
                       <div class="col-md-6 mb-4 d-flex align-items-center">
-      
                         <div class="form-outline datepicker w-100">
                           <input
                             type="date"
@@ -102,12 +128,9 @@
                           />
                           <label for="birthdayDate" class="form-label">Date of Birth</label>
                         </div>
-      
                       </div>
                       <div class="col-md-6 mb-4">
-      
                         <h6 class="mb-2 pb-1">Gender: </h6>
-      
                         <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
@@ -120,7 +143,6 @@
                           />
                           <label class="form-check-label" for="femaleGender">Female</label>
                         </div>
-      
                         <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
@@ -132,7 +154,6 @@
                           />
                           <label class="form-check-label" for="maleGender">Male</label>
                         </div>
-      
                         <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
@@ -144,37 +165,22 @@
                           />
                           <label class="form-check-label" for="otherGender">Other</label>
                         </div>
-      
                       </div>
                     </div>
-      
                     <div class="row">
                       <div class="col-md-6 mb-4 pb-2">
-      
-                        <div class="form-outline">
-                          <input type="email" id="emailAddress" required class="form-control form-control-lg" />
-                          <label class="form-label" for="emailAddress">Email</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6 mb-4 pb-2">
-      
                         <div class="form-outline">
                           <input type="tel" id="phoneNumber" required class="form-control form-control-lg" />
                           <label class="form-label" for="phoneNumber">Phone Number</label>
                         </div>
-      
                       </div>
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-        
-                          <div class="form-outline">
-                            <input type="tel" id="firstName" required class="form-control form-control-lg"/>
-                            <label class="form-label" for="firstName">Aadhaar no</label>
-                          </div>
-        
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <input type="tel" id="emergency" required class="form-control form-control-lg" />
+                          <label class="form-label" for="emergency">Emergency Phone no</label>
                         </div>
-                    </div>
+                      </div>
+                      
                     <div class="form-check d-flex justify-content-center m-5">
                       <input
                         class="form-check-input me-2"
@@ -188,7 +194,7 @@
                       </label>
                     </div>
                     <div class="d-flex justify-content-center">
-                      <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 px-5 text-body">Register</button>
+                      <button type="submit" class="btn btn-block  px-5 text-body" style="background-color:rgba(0, 0, 255, 0.507) ">Register</button>
                     </div>
                   </form>
                 </div>
@@ -203,5 +209,5 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
-  <script async src="script.js"></script>
+  <script async src="assets/script.js"></script>
 </html>

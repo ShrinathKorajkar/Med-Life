@@ -28,7 +28,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="assets/stylesheet.css" />
 
     <title>Med Life</title>
   </head>
@@ -74,11 +74,11 @@
                       <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                       <div class="input-group flex-nowrap">
                         <span class="input-group-text" id="addon-wrapping">DOCTOR ID :</span>
-                        <input type="text" class="form-control" required placeholder="eg : BEG9543210" aria-label="Username" aria-describedby="addon-wrapping">
+                        <input type="text" class="form-control" pattern=".{10,10}" required placeholder="eg : BEG9543210" aria-label="Username" aria-describedby="addon-wrapping">
                     </div>
                     <div class="input-group pt-3 flex-nowrap">
                         <span class="input-group-text"  id="addon-wrapping">PASSWORD :</span>
-                        <input type="password" class="form-control" required aria-label="Username" aria-describedby="addon-wrapping">
+                        <input type="password" class="form-control" minlength="4" required aria-label="Username" aria-describedby="addon-wrapping">
                     </div>
                       <div class="pt-3 mb-4">
                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
@@ -102,5 +102,5 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
-  <script async src="script.js"></script>
+  <script async src="assets/script.js"></script>
 </html>

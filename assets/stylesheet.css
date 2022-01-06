@@ -1,6 +1,6 @@
 .index,
 .user {
-  background-image: url(images/background2.jpeg);
+  background-image: url(../images/background2.jpeg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -9,7 +9,7 @@
 .doc,
 .records,
 .sign_in {
-  background-image: url(images/background1.jpeg);
+  background-image: url(../images/background1.jpeg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

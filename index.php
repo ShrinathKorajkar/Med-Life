@@ -1,3 +1,22 @@
+<?php
+// connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "medlifedb";
+
+$conn = mysqli_connect($server, $username, $password, $database);
+if (!$conn){
+  die("Error connecting");
+}
+else{
+  echo "Connection established";
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +47,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="assets/stylesheet.css" />
 
     <title>Med Life</title>
   </head>
@@ -65,10 +84,29 @@
       </div>
     </header>
     <main class="d-grid p-2">
-        <div class="d-grid align-self-center gap-4 col-6 mx-auto">
-          <a class="btn btn-success btn-lg" role="button" href="user.html">USER</a>
-          <a class="btn btn-info btn-lg" role="button" href="doctor.html">DOCTOR</a>
-        </div> 
+      <section>
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <h2 class="text-center fw-bold text-primary m-0">WELCOME TO MEDLIFE</h2>
+            <h6 class="text-center fw-bold text-danger m-0">  your personal medical database</h6>
+            <div class="col">
+              <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                  <div class=" d-flex align-items-center">
+                    <div class="card-body p-4 text-black">
+                      <div class="d-grid align-self-center col-md-6 gap-4 mx-auto">
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">CHOOSE YOUR OPTION</h5>
+                        <a class="btn btn-success btn-lg" role="button" href="user.html">USER</a>
+                        <a class="btn btn-info btn-lg" role="button" href="doctor.html">DOCTOR</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
     </main>
   </body>
   <script
@@ -76,5 +114,5 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
-  <script async src="script.js"></script>
+  <script async src="assets/script.js"></script>
 </html>
