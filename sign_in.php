@@ -1,3 +1,39 @@
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  $showAlert = false;
+
+  // include 'partials/_dbconnect.php';
+  $name = $_POST["name"];
+  $aadhaar = $_POST["aadhaar"];
+  $age =$_POST["age"];
+  $bloodgroup = $_POST["bloodgroup"];
+  $birthdayDate = $_POST["birthdayDate"];
+  $gender = $_POST["gender"];
+  
+  
+  $sql=
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -69,21 +105,21 @@
                 <div class="card-body p-4 p-md-5">
                   <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 text-decoration-underline"><center> Registration Form</center></h2>
                   <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Enter Your Details</h5>
-                  <form>
+                  <form action="sign_in.php" method="post">
       
                     <div class="row">
                       <div class="col-md-6 mb-4">
       
                         <div class="form-outline">
-                          <input type="text" id="firstName" required class="form-control form-control-lg" />
-                          <label class="form-label" for="firstName">Name</label>
+                          <input type="text" id="name" name="name" required class="form-control form-control-lg" />
+                          <label class="form-label" for="name">Name</label>
                         </div>
       
                       </div>
                         <div class="col-md-6 mb-4">
         
                           <div class="form-outline">
-                            <input type="tel" id="aadhaar" required class="form-control form-control-lg" maxlength="12" minlength="12"/>
+                            <input type="tel" id="aadhaar" name="aadhaar" required class="form-control form-control-lg" maxlength="12" minlength="12"/>
                             <label class="form-label" for="aadhaar">Aadhaar no</label>
                           </div>
         
@@ -93,7 +129,7 @@
                       <div class="col-md-6 mb-4">
       
                         <div class="form-outline">
-                          <input type="number" id="age" min="1" max="150" required class="form-control form-control-lg" />
+                          <input type="number" id="age" name="number" min="1" max="150" required class="form-control form-control-lg" />
                           <label class="form-label" for="age">Age</label>
                         </div>
       
@@ -101,7 +137,7 @@
                         <div class="col-md-6 mb-4">
         
                           <div class="form-outline">
-                            <select class="form-select form-select-lg" id="bloodgroup" aria-label=".form-select-lg example">
+                            <select class="form-select form-select-lg" id="bloodgroup" name="bloodgroup" aria-label=".form-select-lg example">
                               <option selected><h6 class="fs-6"> Select</h6></option>
                               <option value="1">A +ve</option>
                               <option value="2">A -ve</option>
@@ -123,7 +159,7 @@
                           <input
                             type="date"
                             class="form-control form-control-lg"
-                            id="birthdayDate"
+                            id="birthdayDate" name="birthdayDate"
                             required
                           />
                           <label for="birthdayDate" class="form-label">Date of Birth</label>
@@ -135,9 +171,9 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            name="inlineRadioOptions"
+                            name="gender"
                             id="femaleGender"
-                            value="option1"
+                            value="female"
                             checked
                             required
                           />
@@ -147,9 +183,9 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            name="inlineRadioOptions"
+                            name="gender"
                             id="maleGender"
-                            value="option2"
+                            value="male"
                             required
                           />
                           <label class="form-check-label" for="maleGender">Male</label>
@@ -158,9 +194,9 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            name="inlineRadioOptions"
+                            name="gender"
                             id="otherGender"
-                            value="option3"
+                            value="other"
                             required
                           />
                           <label class="form-check-label" for="otherGender">Other</label>
@@ -186,7 +222,7 @@
                         class="form-check-input me-2"
                         type="checkbox"
                         value=""
-                        id="form2Example3c"
+                        id="form2Example3c" name="form2Example3c"
                         required
                       />
                       <label class="form-check-label" for="form2Example3">
