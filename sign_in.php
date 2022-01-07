@@ -2,7 +2,7 @@
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $showAlert = false;
 
-  include 'index.php';
+  include 'dbconnect.php';
   $name = $_POST["name"];
   $aadhaar = $_POST["aadhaar"];
   $age = $_POST["age"];
@@ -129,14 +129,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                           <div class="form-outline">
                             <select class="form-select form-select-lg" id="bloodgroup" name="bloodgroup" aria-label=".form-select-lg example">
                               <option selected><h6 class="fs-6"> Select</h6></option>
-                              <option value="A+">A +ve</option>
-                              <option value="A-">A -ve</option>
-                              <option value="B+">B +ve</option>
-                              <option value="B-">B -ve</option>>
-                              <option value="AB+">AB +ve</option>
-                              <option value="AB-">AB -ve</option>>
-                              <option value="O+">O +ve</option>
-                              <option value="O-">O -ve</option>
+                              <option value="A +ve">A +ve</option>
+                              <option value="A -ve">A -ve</option>
+                              <option value="B +ve">B +ve</option>
+                              <option value="B -ve">B -ve</option>>
+                              <option value="AB +ve">AB +ve</option>
+                              <option value="AB -ve">AB -ve</option>>
+                              <option value="O +ve">O +ve</option>
+                              <option value="O -ve">O -ve</option>
                             </select>
                             <label class="form-label" for="bloodgroup">Blood Group</label>
                           </div>
