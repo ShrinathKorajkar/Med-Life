@@ -1,6 +1,12 @@
 <?php
 
 include 'dbconnect.php';
+// $sql = "Select * from user where aadhar_no='$aadhar_no'";
+// $sql1 = "Select *from user where username='$username'";
+// $res = mysqli_query($conn, $sql);
+// $res1 = mysqli_query($conn, $sql1);
+// $num = mysqli_num_rows($res);
+// $num1 = mysqli_num_rows($res1);
 
 ?>
 
@@ -68,11 +74,21 @@ include 'dbconnect.php';
           class="card-header fw-bold h1 fw-bold text-center text-success  text-decoration-underline bg-warning bg-gradient bg-opacity-50">
           PATIENT RECORDS
         </div>
-        <div class="card-body">
+        
+         <div class="card-body">
           <div class="row my-3">
-            <div class="card-title col">AADHAR NO :</div>
-            <div class="card-title col">NAME :</div>
-          </div>
+            <?php
+            $sql = "Select * from user where aadhar_no='$aadhar_no'";
+            $sql1 = "Select *from user where username='$username'";
+            $result = mysqli_query($conn, $sql);
+            $result1 = mysqli_query($conn, $sql1);
+            $num = mysqli_num_rows($result);
+            $num1 = mysqli_num_rows($result1);
+            ec<div class="card-title col">AADHAR NO :$num</div>
+              <div class="card-title col">NAME :$num1</div>
+            ?>
+         </div>
+        
 
           <p class="card-text">With supporting text content.</p>
 

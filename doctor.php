@@ -5,7 +5,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   include 'dbconnect.php';
   $doc_id = $_POST["doc_id"];
   $password = $_POST["password"];  
-  $sql = "Select * from doc where doc_id='$doc_id' AND password='$password'";
+  $sql = "Select * from doc where doc_id='$doc_id' AND passwords='$password'";
   $result = mysqli_query($conn, $sql);
   $num = mysqli_num_rows($result);
   if ($num == 1){
