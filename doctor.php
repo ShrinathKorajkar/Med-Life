@@ -1,6 +1,34 @@
 <?php
+$login = false;
+$showError = false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  include 'dbconnect.php';
+  $doc_id = $_POST["doc_id"];
+  $password = $_POST["password"];  
+  $sql = "Select * from doc where doc_id='$doc_id' AND password='$password'";
+  $result = mysqli_query($conn, $sql);
+  $num = mysqli_num_rows($result);
+  if ($num == 1){
 
-include 'dbconnect.php';
+    $login = true;
+    // session_start();
+    // $_SESSION['loggedin'] = true;
+    // $_SESSION['DOC_ID'] = $DOC_ID;
+    header("location: user.php");
+
+  }
+  else{
+    $showError = "Invalid credentials";
+  }
+}
+else{
+  $showError = "Invalid credentials";
+
+}
+
+
+
+
 
 ?>
 
@@ -39,6 +67,24 @@ include 'dbconnect.php';
     <title>Med Life</title>
   </head>
   <body class="bg-warning bg-opacity-10 doc">
+  <?php
+    if($login){
+    echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> You are logged in
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> ';
+    }
+    if($showError){
+    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> '. $showError.'
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> ';
+    }
+    ?>
     <header>
       <div class="container-fluid" style="background-color: white;">
         <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
@@ -76,15 +122,15 @@ include 'dbconnect.php';
               <div class="row g-0">
                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                   <div class="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    <form action="/dbms_miniproject/doctor.php" method ="POST">
                       <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                       <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="addon-wrapping">DOCTOR ID :</span>
-                        <input type="text" class="form-control" pattern=".{10,10}" required placeholder="eg : BEG9543210" aria-label="Username" aria-describedby="addon-wrapping">
+                        <span class="input-group-text"  id="doc_id">DOCTOR ID :</span>
+                        <input type="text" class="form-control" name = "doc_id" pattern=".{10,10}" required placeholder="eg : BEG9543210" aria-label="doc_id" aria-describedby="addon-wrapping">
                     </div>
                     <div class="input-group pt-3 flex-nowrap">
-                        <span class="input-group-text"  id="addon-wrapping">PASSWORD :</span>
-                        <input type="password" class="form-control" minlength="4" required aria-label="Username" aria-describedby="addon-wrapping">
+                        <span class="input-group-text"   id="password">PASSWORD :</span>
+                        <input type="password" class="form-control" name="password" minlength="4" required aria-label="password" aria-describedby="addon-wrapping">
                     </div>
                       <div class="pt-3 mb-4">
                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>

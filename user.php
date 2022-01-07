@@ -1,7 +1,34 @@
 <?php
+// $login = false;
+// $showError = false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    include 'dbconnect.php';
+    $aadhaar_no = $_POST["aadhaar_no"];
+    // $password = $_POST["password"]; 
+    
+     
+    // $sql = "Select * from users where username='$username' AND password='$password'";
+    $sql = "Select * from user where aadhaar_no='$aadhaar_no'";
+    $result = mysqli_query($conn, $sql);
+    $num = mysqli_num_rows($result);
+    if ($num == 1){
+        // while($row=mysqli_fetch_assoc($result)){
+        //     if (password_verify($password, $row['password'])){ 
+                $login = true;
+                // session_start();
+                // $_SESSION['loggedin'] = true;
+                // $_SESSION['aadhaar_no'] = $aadhaar_no;
+                header("location: records.php");
+            } 
+            else{
+                $showError = "Invalid Credentials";
+            }
+        }
+    else{
+        $showError = "Invalid aadhaar no";
+    }
 
-include 'dbconnect.php';
-
+    
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +66,24 @@ include 'dbconnect.php';
     <title>Med Life</title>
   </head>
   <body class="bg-warning bg-opacity-10 user">
+  
+    <!-- // if($login){
+    // echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+    //     <strong>Success!</strong> You are logged in
+    //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    //         <span aria-hidden="true">&times;</span>
+    //     </button>
+    // </div> ';
+    // }
+    // if($showError){
+    // echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    //     <strong>Error!</strong> '. $showError.'
+    //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    //         <span aria-hidden="true">&times;</span>
+    //     </button>
+    // </div> ';
+    // }  -->
+    
     <header>
       <div class="container-fluid" style="background-color: white;">
         <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
@@ -79,8 +124,8 @@ include 'dbconnect.php';
                       <form>
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                         <div class="input-group flex-nowrap">
-                          <span class="input-group-text" id="addon-wrapping">USER ID :</span>
-                          <input type="text" required class="form-control" placeholder="aadhaar no " maxlength="12" minlength="12" aria-label="Username" aria-describedby="addon-wrapping">
+                          <span class="input-group-text" id="aadhaar_no">USER ID :</span>
+                          <input type="text" required class="form-control" name = "aadhaar_no" placeholder="aadhaar no " maxlength="12" minlength="12" aria-label="aadhaar_no" aria-describedby="addon-wrapping">
                         </div>
                         <div class="pt-3 mb-4">
                           <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
