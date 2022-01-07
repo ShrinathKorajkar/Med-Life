@@ -66,24 +66,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Med Life</title>
   </head>
   <body class="bg-warning bg-opacity-10 user">
-  <?php
-    if($login){
-    echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> You are logged in
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> ';
-    }
-    if($showError){
-    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> ';
-    } 
-    ?>
     <header>
       <div class="container-fluid" style="background-color: white;">
         <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
@@ -114,6 +96,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </header>
     <main class="d-grid p-2">
       <section>
+        <?php
+          if($login){
+            echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> You are logged in
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> ';
+            }
+            if($showError){
+            echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> ';
+          } 
+        ?>
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
