@@ -61,7 +61,7 @@ include 'dbconnect.php';
     </div>
   </header>
   <main>
-    <section class="container">
+    <section class="container overflow-scroll">
       <div class="container-fluid  lh-lg  text-center text-success m-auto text-decoration-underline"></div>
       <div class="card">
         <div
@@ -155,16 +155,16 @@ include 'dbconnect.php';
                           }else{
                             echo"<td>". $row['MEDS'] . "</td>";
                           }
-                          if($row['INJURY']==NULL){
-                            echo"<td>NONE</td>";
-                          }else{
-                            echo "<td>". $row['INJURY']." </td>";
-                          } 
                           if($row['ALLERGIES']==NULL){
                             echo"<td>NONE</td>";
                           }else{
                             echo "<td>". $row['ALLERGIES'] . "</td>";
                           }
+                          if($row['INJURY']==NULL){
+                            echo"<td>NONE</td>";
+                          }else{
+                            echo "<td>". $row['INJURY']." </td>";
+                          } 
                           echo "</tr>";
                         } 
                       ?>
