@@ -93,20 +93,30 @@ include 'dbconnect.php';
                         <th scope="col">Sno</th>
                         <th scope="col">Age</th>
                         <th scope="col">Blood type</th>
+                        <th scope="col">D.O.B</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Phone-no</th>
                         <th scope="col">Emergency-no</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                      </tr>
+                      <?php
+                        $sno = 0;
+                        $sql = "SELECT * FROM `P_details`";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                          $sno = $sno + 1;
+                          echo "<tr>
+                          <th scope='row'>". $sno ."</th>
+                          <td>". $row['AGE'] ." </td>
+                          <td>". $row['BLOOD_GRP'] . "</td>
+                          <td>". $row['DOB'] . "</td>
+                          <td>". $row['GENDER'] . "</td>
+                          <td>". $row['CONTACT_NO'] . "</td>
+                          <td>". $row['ECONTACT_NO'] . "</td>
+                        </tr>";
+                        } 
+                      ?>
                     </tbody>
                   </table>
                 </div>
@@ -116,7 +126,7 @@ include 'dbconnect.php';
               <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <h5 class="card-title">INJURY, ALLERGIES, AND CHRONIC DISEASE</h5>
+                  <h5 class="card-title">INJURY, ALLERGIES, AND DAILY MEDS</h5>
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -126,18 +136,38 @@ include 'dbconnect.php';
                     <thead>
                       <tr>
                         <th scope="col">Sno</th>
-                        <th scope="col">Permanent-injury</th>
+                        <th scope="col">Daily meds</th>
                         <th scope="col">Allergies</th>
-                        <th scope="col">Chronic Disease</th>
+                        <th scope="col">PREVIOUS INJURY</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
+                    <?php
+                        $sno = 0;
+                        $sql = "SELECT * FROM `OTHER_MED`";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                          $sno = $sno + 1;
+                          echo "<tr>";
+                          echo"<th scope='row'>". $sno ."</th>" ;
+                          if($row['MEDS']==NULL){
+                            echo"<td>NONE</td>";
+                          }else{
+                            echo"<td>". $row['MEDS'] . "</td>";
+                          }
+                          if($row['INJURY']==NULL){
+                            echo"<td>NONE</td>";
+                          }else{
+                            echo "<td>". $row['INJURY']." </td>";
+                          } 
+                          if($row['ALLERGIES']==NULL){
+                            echo"<td>NONE</td>";
+                          }else{
+                            echo "<td>". $row['ALLERGIES'] . "</td>";
+                          }
+                          echo "</tr>";
+                        } 
+                      ?>
                     </tbody>
                   </table>
               </div>
@@ -166,16 +196,28 @@ include 'dbconnect.php';
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@twitter</td>
-                      </tr>
+                    <?php
+                        $sno = 0;
+                        $sql = "SELECT * FROM `MED_HISTORY`";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                          $sno = $sno + 1;
+                          echo "<tr>
+                          <th scope='row'>". $sno ."</th>
+                          <td>". $row['S_DATE'] ." </td>";
+                          if($row['E_DATE']==NULL){
+                            echo"<td>ACTIVE</td>";
+                          }else{
+                            echo "<td>". $row['E_DATE'] . "</td>";
+                          }
+                          echo"<td>". $row['SYMPTOMS'] . "</td>
+                          <td>". $row['DISEASE'] . "</td>
+                          <td>". $row['MEDICATION'] . "</td>
+                          <td>". $row['DOC_NAME'] . "</td>
+                          <td>". $row['STAT'] . "</td>
+                        </tr>";
+                        } 
+                      ?>
                     </tbody>
                   </table>
                 </div>
