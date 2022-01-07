@@ -1,14 +1,14 @@
 <?php
-// $login = false;
-// $showError = false;
+$login = false;
+$showError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'dbconnect.php';
-    $aadhaar_no = $_POST["aadhaar_no"];
+    $aadhar_no = $_POST["aadhaar_no"];
     // $password = $_POST["password"]; 
     
      
     // $sql = "Select * from users where username='$username' AND password='$password'";
-    $sql = "Select * from user where aadhaar_no='$aadhaar_no'";
+    $sql = "Select * from user where aadhar_no='$aadhar_no'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
     if ($num == 1){
@@ -19,16 +19,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // $_SESSION['loggedin'] = true;
                 // $_SESSION['aadhaar_no'] = $aadhaar_no;
                 header("location: records.php");
-            } 
-            else{
-                $showError = "Invalid Credentials";
-            }
+            // } 
+            // else{
+            //     $showError = "Invalid Credentials";
+            // }
         }
     else{
-        $showError = "Invalid aadhaar no";
+        $showError = true;
     }
 
-    
+}  
 ?>
 
 <!DOCTYPE html>
@@ -66,24 +66,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Med Life</title>
   </head>
   <body class="bg-warning bg-opacity-10 user">
-  
-    <!-- // if($login){
-    // echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-    //     <strong>Success!</strong> You are logged in
-    //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //         <span aria-hidden="true">&times;</span>
-    //     </button>
-    // </div> ';
-    // }
-    // if($showError){
-    // echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    //     <strong>Error!</strong> '. $showError.'
-    //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //         <span aria-hidden="true">&times;</span>
-    //     </button>
-    // </div> ';
-    // }  -->
-    
+  <?php
+    if($login){
+    echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> You are logged in
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> ';
+    }
+    if($showError){
+    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> ';
+    } 
+    ?>
     <header>
       <div class="container-fluid" style="background-color: white;">
         <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
@@ -121,7 +121,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="row g-0">
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">
-                      <form>
+                      <form action="/dbms_miniproject/user.php" method ="POST">
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                         <div class="input-group flex-nowrap">
                           <span class="input-group-text" id="aadhaar_no">USER ID :</span>

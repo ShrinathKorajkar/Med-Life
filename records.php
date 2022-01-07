@@ -138,7 +138,7 @@ include 'dbconnect.php';
                         <th scope="col">Sno</th>
                         <th scope="col">Daily meds</th>
                         <th scope="col">Allergies</th>
-                        <th scope="col">PREVIOUS INJURY</th>
+                        <th scope="col">Previous Injury</th>
                       </tr>
                     </thead>
                     <tbody>
