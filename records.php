@@ -1,16 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $showAlert = false;
+  // session_start();
 
-<<<<<<< HEAD
-include 'dbconnect.php';
-// $sql = "Select * from user where aadhar_no='$aadhar_no'";
-// $sql1 = "Select *from user where username='$username'";
-// $res = mysqli_query($conn, $sql);
-// $res1 = mysqli_query($conn, $sql1);
-// $num = mysqli_num_rows($res);
-// $num1 = mysqli_num_rows($res1);
-=======
   include 'dbconnect.php';
   $S_DATE = $_POST["Start-date"];
   $E_DATE = $_POST["End-date"];
@@ -19,7 +11,6 @@ include 'dbconnect.php';
   $MEDICATION = $_POST["Medication"];
   $DOC_NAME = $_POST["Doc-name"];
   $STAT = $_POST["status"];
->>>>>>> 65713c0e9f0d173b68a763667fb975e25270cc7e
 
 
   $sql = "INSERT INTO `MED_HISTORY` (`S_DATE`, `E_DATE`, `SYMPTOMS`, `DISEASE`, `MEDICATION`, `DOC_NAME`, `STAT`) VALUES ('$S_DATE', '$E_DATE', '$SYMPTOMS', '$DISEASE', '$MEDICATION', '$DOC_NAME', '$STAT');";
@@ -101,27 +92,18 @@ include 'dbconnect.php';
         
          <div class="card-body">
           <div class="row my-3">
-<<<<<<< HEAD
             <?php
-            $sql = "Select * from user where aadhar_no='$aadhar_no'";
-            $sql1 = "Select *from user where username='$username'";
-            $result = mysqli_query($conn, $sql);
-            $result1 = mysqli_query($conn, $sql1);
-            $num = mysqli_num_rows($result);
-            $num1 = mysqli_num_rows($result1);
-            ec<div class="card-title col">AADHAR NO :$num</div>
-              <div class="card-title col">NAME :$num1</div>
+              include "dbconnect.php"; 
+            
+             session_start();
+             $aadhar_no = $_SESSION['aadhaar_no'];
+            //  $get = "Select username from user where aadhar_no='$aadhar_no'";
+            //  $que = mysqli_query($conn, $get);
+            //  $user = mysqli_fetch_object($que, 'username');
+            echo "<div class='card-title col'>AADHAR NO : $aadhar_no </div>
+            <div class='card-title col'>NAME :</div>";
             ?>
-         </div>
-        
-
-          <p class="card-text">With supporting text content.</p>
-
-=======
-            <div class="card-title col">AADHAR NO :</div>
-            <div class="card-title col">NAME :</div>
           </div>
->>>>>>> 65713c0e9f0d173b68a763667fb975e25270cc7e
           <div class="accordion accordion-flush" id="accordionExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
@@ -146,6 +128,8 @@ include 'dbconnect.php';
                     <tbody>
                       <?php
                       include 'dbconnect.php';
+                      // session_start();
+                      // $aadhar_no = $_SESSION['aadhaar_no'];
                       $sno = 0;
                       $sql = "SELECT * FROM `P_details`";
                       $result1 = mysqli_query($conn, $sql);

@@ -15,9 +15,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // while($row=mysqli_fetch_assoc($result)){
         //     if (password_verify($password, $row['password'])){ 
                 $login = true;
-                // session_start();
-                // $_SESSION['loggedin'] = true;
-                // $_SESSION['aadhaar_no'] = $aadhaar_no;
+                session_start();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['aadhaar_no'] = $aadhar_no;
                 header("location: records.php");
             // } 
             // else{
