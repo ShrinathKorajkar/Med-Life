@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,21 +68,16 @@
         $result = mysqli_query($conn, $sql);
         $num = mysqli_num_rows($result);
         if ($num == 1) {
-          // while($row=mysqli_fetch_assoc($result)){
-          //     if (password_verify($password, $row['password'])){ 
           $login = true;
-          // session_start();
-          // $_SESSION['loggedin'] = true;
-          // $_SESSION['aadhaar_no'] = $aadhaar_no;
+          $_SESSION['userlog'] = true;
+          $_SESSION['aadhar_no'] = $aadhar_no;
           header("location: records.php");
         }
         if (!$login) {
           echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Error!</strong> Invalid User Id
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div> ';
+          <strong>Error!</strong> Invalid User Id
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> ';
         }
       }
       ?>
