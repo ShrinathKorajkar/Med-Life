@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,27 +63,22 @@
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $login = false;
         include 'dbconnect.php';
-        $aadhar_no = $_POST["aadhaar_no"];
+        $aadhar_no = $_POST["aadhar_no"];
 
         $sql = "Select * from user where aadhar_no='$aadhar_no'";
         $result = mysqli_query($conn, $sql);
         $num = mysqli_num_rows($result);
         if ($num == 1) {
-          // while($row=mysqli_fetch_assoc($result)){
-          //     if (password_verify($password, $row['password'])){ 
           $login = true;
-          // session_start();
-          // $_SESSION['loggedin'] = true;
-          // $_SESSION['aadhaar_no'] = $aadhaar_no;
+          $_SESSION['userlog'] = true;
+          $_SESSION['aadhar_no'] = $aadhar_no;
           header("location: records.php");
         }
         if (!$login) {
           echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Error!</strong> Invalid User Id
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div> ';
+          <strong>Error!</strong> Invalid User Id
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> ';
         }
       }
       ?>
@@ -92,8 +92,8 @@
                     <form action="/dbms_miniproject/user.php" method="POST">
                       <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                       <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="aadhaar_no">USER ID :</span>
-                        <input type="text" required class="form-control" name="aadhaar_no" placeholder="aadhaar no " maxlength="12" minlength="12" aria-label="aadhaar_no" aria-describedby="addon-wrapping">
+                        <span class="input-group-text" id="aadhar_no">USER ID :</span>
+                        <input type="text" required class="form-control" name="aadhar_no" placeholder="aadhar no " maxlength="12" minlength="12" aria-label="aadhaar_no" aria-describedby="addon-wrapping">
                       </div>
                       <div class="pt-3 mb-4">
                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>

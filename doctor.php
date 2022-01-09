@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,24 +64,23 @@
         include 'dbconnect.php';
         $doc_id = $_POST["doc_id"];
         $password = $_POST["password"];
-        $sql = "Select * from doc where doc_id='$doc_id' AND passwords='$password'";
+        $sql = "Select doc_name from doc where doc_id='$doc_id' AND passwords='$password'";
         $result = mysqli_query($conn, $sql);
-        $num = mysqli_num_rows($result);
-        if ($num == 1) {
+        $row = mysqli_fetch_assoc($result);
+        
+        if ($row) {
+          $doc_name = $row['doc_name'];
 
           $login = true;
-          // session_start();
-          // $_SESSION['loggedin'] = true;
-          // $_SESSION['DOC_ID'] = $DOC_ID;
+          $_SESSION['doclog'] = true;
+          $_SESSION['docname'] = $doc_name;
           header("location: user.php");
         }
         if (!$login) {
           echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Error!</strong> Doctor id or password is wrong
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div> ';
+          <strong>Error!</strong> Invalid User Id
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div> ';
         }
       }
       ?>

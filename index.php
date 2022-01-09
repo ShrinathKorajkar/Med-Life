@@ -1,6 +1,7 @@
 <?php
 
 include 'dbconnect.php';
+// include 'logout.php';
 
 ?>
 

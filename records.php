@@ -1,15 +1,57 @@
 <?php
+// session_start();
+session_start();
+$ano = $_SESSION['aadhar_no'];
+include "dbconnect.php";
 $update = false;
-include 'dbconnect.php';
+$showAlert = false;
+$delete = false;
+$error = false;
+$doclog = false;
+$userlog = false;
+if (isset($_SESSION['doclog'])) {
+  $doclog = true;
+}
+if (isset($_SESSION['userlog'])) {
+  $userlog = true;
+}
+
+if (isset($_SESSION['userlog'])) {
+  $aadhar_no = $_SESSION['aadhar_no'];
+  $sql = "Select `username` from `user` where `aadhar_no`='$aadhar_no'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $username = $row['username'];
+} else {
+  echo '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">SORRY!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          <p>you are not logged in </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>';
+  header("location: index.php");
+}
+
+
 if (isset($_GET['delete'])) {
   $sno = $_GET['delete'];
   $delete = true;
   $sql = "DELETE FROM `MED_HISTORY` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
-}
+} 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $showAlert = false;
-  // session_start();
+
 
   if (isset($_POST['snoEdit'])) {
     // Update the record
@@ -32,9 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result) {
       $update = true;
     } else {
-      echo "We could not update the record successfully";
+      $error = true;
     }
   } else {
+
     $S_DATE = $_POST["Start-date"];
     if (isset($_POST["End-date"])) {
       $E_DATE = $_POST["End-date"];
@@ -47,12 +90,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $DOC_NAME = $_POST["Doc-name"];
     $STAT = $_POST["status"];
 
-
-
     $sql = "INSERT INTO `MED_HISTORY` (`S_DATE`, `E_DATE`, `SYMPTOMS`, `DISEASE`, `MEDICATION`, `DOC_NAME`, `STAT`) VALUES ('$S_DATE', '$E_DATE', '$SYMPTOMS', '$DISEASE', '$MEDICATION', '$DOC_NAME', '$STAT');";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $showAlert = true;
+    } else {
+      $error = true;
     }
   }
 }
@@ -121,42 +164,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </header>
   <main style="overflow: scroll;">
-    <!-- <section>
-      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <section>
+      <?php
+      if ($update) {
+        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Success!</strong> Records Updated
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div> ';
+      }
+      if ($showAlert) {
+        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Success!</strong> Records Inserted successfully
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div> ';
+      }
+      if ($delete) {
+        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Success!</strong> Records Deleted successfully
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div> ';
+      }
+      if ($error) {
+        echo '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="editModalLabel">Edit this Note</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+              <h5 class="modal-title" id="exampleModalLabel">SORRY!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/crud/index.php" method="POST">
-              <div class="modal-body">
-                <input type="hidden" name="snoEdit" id="snoEdit">
-                <div class="form-group">
-                  <label for="title">Note Title</label>
-                  <input type="text" class="form-control" id="" name="" aria-describedby="emailHelp">
-                </div>
-
-                <div class="form-group">
-                  <label for="desc">Note Description</label>
-                  <textarea class="form-control" id="descriptionEdit" name="descriptionEdit" rows="3"></textarea>
-                </div>
-              </div>
-              <div class="modal-footer d-block mr-auto">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-            </form>
+            <div class="modal-body">
+            <p>Error occured while Processing Your request</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section> -->
-    <section>
-      <!-- Button trigger modal -->
+      </div>';
+      }
 
-
+      ?>
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl  modal-dialog-scrollable">
@@ -189,13 +236,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="Cured">Cured</option>
                   </select>
                 </div>
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
             </form>
+
           </div>
         </div>
       </div>
@@ -209,8 +256,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="card-body">
           <div class="row my-3 mx-2">
-            <div class="card-title col">AADHAR NO :</div>
-            <div class="card-title col">NAME :</div>
+            <?php
+
+            echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
+                  <div class='card-title col h4'>NAME : " . $username . "</div>";
+            if ($userlog) {
+              $_SESSION["onlyuser"] = true;
+              echo "<a class='btn btn-primary card-title col-2' href='logout.php' role='button'>User logout</a>";
+            }
+            if ($doclog) {
+              $_SESSION["onlyuser"] = false;
+              echo "<a class='btn btn-primary card-title col col-2' href='logout.php' role='button'>Doc logout</a>";
+            }
+
+            ?>
           </div>
           <div class="accordion accordion-flush" id="accordionExample">
             <div class="accordion-item">
@@ -221,30 +280,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body ">
-                  <div class="container-fluid mt-3 mb-5">
-                    <h5 class="card-text">Add New entry</h5>
-                    <form action="/dbms_miniproject/records.php" method="POST">
-                      <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                        <label class="col visually-hidden" for="add-column">Start-date</label>
-                        <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                        <label class="col visually-hidden" for="add-column">End-date</label>
-                        <input type="text" class="form-control" id="add-column" name="End-date" placeholder="End-date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                        <label class="col visually-hidden" for="add-column">Symptoms</label>
-                        <input type="text" class="form-control" id="add-column" name="Symptoms" placeholder="Symptoms" required>
-                        <label class="col visually-hidden" for="add-column">Disease</label>
-                        <input type="text" class="form-control" id="add-column" name="Disease" placeholder="Disease" required>
-                        <label class="col visually-hidden" for="add-column">Medication</label>
-                        <input type="text" class="form-control" id="add-column" name="Medication" placeholder="Medication" required>
-                        <label class="col visually-hidden" for="add-column">Doc-name</label>
-                        <input type="text" class="form-control" id="add-column" name="Doc-name" placeholder="Doc-name" required>
-                        <select class="form-select" id="status" name="status" required>
-                          <option value="Active" selected>Active</option>
-                          <option value="Cured">Cured</option>
-                        </select>
-                        <button type="submit" class="btn col btn-primary">ADD</button>
-                      </div>
-                    </form>
-                  </div>
+                  <?php
+
+                  if ($doclog) {
+                    echo '<div class="container-fluid mt-3 mb-5">
+                 
+                          <h5 class="card-text">Add New entry</h5>
+                          <form action="/dbms_miniproject/records.php" method="POST">
+                            <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                              <label class="col visually-hidden" for="add-column">Start-date</label>
+                              <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus="(this.type="date")" onblur="(this.type="text")" required>
+                              <label class="col visually-hidden" for="add-column">End-date</label>
+                              <input type="text" class="form-control" id="add-column" name="End-date" placeholder="End-date" onfocus="(this.type="date")" onblur="(this.type="text")">
+                              <label class="col visually-hidden" for="add-column">Symptoms</label>
+                              <input type="text" class="form-control" id="add-column" name="Symptoms" placeholder="Symptoms" required>
+                              <label class="col visually-hidden" for="add-column">Disease</label>
+                              <input type="text" class="form-control" id="add-column" name="Disease" placeholder="Disease" required>
+                              <label class="col visually-hidden" for="add-column">Medication</label>
+                              <input type="text" class="form-control" id="add-column" name="Medication" placeholder="Medication" required>
+                              <label class="col visually-hidden" for="add-column">Doc-name</label>
+                              <input type="text" class="form-control" id="add-column" name="Doc-name" placeholder="Doc-name" required>
+                              <select class="form-select" id="status" name="status" required>
+                                <option value="Active" selected>Active</option>
+                                <option value="Cured">Cured</option>
+                              </select>
+                              <button type="submit" class="btn col btn-primary">ADD</button>
+                            </div>
+                          </form>
+                        </div>';
+                  }
+                  ?>
                   <table class="table table-dark table-hover table-striped" id="myTable3">
                     <thead>
                       <tr>
@@ -256,16 +321,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th scope="col">Medication</th>
                         <th scope="col">Doc-name</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Edit</th>
+                        <?php
+                        if ($doclog) {
+                          echo "<th scope='col'>Edit</th>";
+                        }
+                        ?>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                      include 'dbconnect.php';
-                      // session_start();
-                      // $aadhar_no = $_SESSION['aadhaar_no'];
+
                       $sno = 0;
-                      $sql = "SELECT * FROM `MED_HISTORY`";
+                      
+                      $sql = "SELECT * FROM `MED_HISTORY` WHERE `aadhar_no`='$ano'";
                       $result3 = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result3)) {
                         $sno = $sno + 1;
@@ -281,9 +349,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           <td>" . $row['DISEASE'] . "</td>
                           <td>" . $row['MEDICATION'] . "</td>
                           <td>" . $row['DOC_NAME'] . "</td>
-                          <td>" . $row['STAT'] . "</td>
-                          <td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>
-                        </tr>";
+                          <td>" . $row['STAT'] . "</td>";
+                        if ($doclog) {
+                          echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
+                        }
+                        echo "</tr>";
                       }
                       ?>
                     </tbody>
@@ -310,9 +380,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </thead>
                     <tbody>
                       <?php
-                      include 'dbconnect.php';
                       $sno = 0;
-                      $sql = "SELECT * FROM `OTHER_MED`";
+                      $sql = "SELECT * FROM `OTHER_MED` WHERE `aadhar_no`='$ano'";
                       $result2 = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result2)) {
                         $sno = $sno + 1;
@@ -362,9 +431,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       </thead>
                       <tbody>
                         <?php
-                        include 'dbconnect.php';
+
                         $sno = 0;
-                        $sql = "SELECT * FROM `P_details`";
+                        $sql = "SELECT * FROM `P_details` WHERE `aadhar_no`='$ano'";
                         $result1 = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result1)) {
                           $sno = $sno + 1;
@@ -447,4 +516,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   })
 </script>
 
-</html>
+</html>s
