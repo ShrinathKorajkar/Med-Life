@@ -206,28 +206,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="card-header fw-bold h1 fw-bold text-center text-success  text-decoration-underline bg-warning bg-gradient bg-opacity-50">
           PATIENT RECORDS
         </div>
-<<<<<<< HEAD
-        
-         <div class="card-body">
-          <div class="row my-3">
-            <?php
-              include "dbconnect.php"; 
-            
-             session_start();
-             $aadhar_no = $_SESSION['aadhaar_no'];
-            //  $get = "Select username from user where aadhar_no='$aadhar_no'";
-            //  $que = mysqli_query($conn, $get);
-            //  $user = mysqli_fetch_object($que, 'username');
-            echo "<div class='card-title col'>AADHAR NO : $aadhar_no </div>
-            <div class='card-title col'>NAME :</div>";
-            ?>
-=======
 
         <div class="card-body">
           <div class="row my-3 mx-2">
             <div class="card-title col">AADHAR NO :</div>
             <div class="card-title col">NAME :</div>
->>>>>>> 0c1f5efb3aeb739e592b9769f1df03c3af51aafe
           </div>
           <div class="accordion accordion-flush" id="accordionExample">
             <div class="accordion-item">
