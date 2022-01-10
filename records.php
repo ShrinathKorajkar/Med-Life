@@ -8,15 +8,14 @@ $delete = false;
 $error = false;
 $doclog = false;
 $userlog = false;
+$aadhar_no = $_SESSION['aadhar_no'];
+$docname = $_SESSION['docname'];
 if (isset($_SESSION['doclog'])) {
   $doclog = true;
 }
-if (isset($_SESSION['userlog'])) {
-  $userlog = true;
-}
 
 if (isset($_SESSION['userlog'])) {
-  $aadhar_no = $_SESSION['aadhar_no'];
+  $userlog = true;
   $sql = "Select `username` from `user` where `aadhar_no`='$aadhar_no'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
@@ -48,8 +47,6 @@ if (isset($_GET['delete'])) {
   $delete = true;
   $sql = "DELETE FROM `MED_HISTORY` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
-} else {
-  $error = true;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -66,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $SympEdit = $_POST["SympEdit"];
     $DiseaseEdit = $_POST["DiseaseEdit"];
     $MedEdit = $_POST["MedEdit"];
-    $DocnmEdit = $_POST["DocnmEdit"];
+
     $statEdit = $_POST["statEdit"];
 
     // Sql query to be executed
-    $sql = "UPDATE `MED_HISTORY` SET `S_DATE` = '$SdateEdit', `E_DATE` = '$EdateEdit', `SYMPTOMS` = ' $SympEdit', `DISEASE` = '$DiseaseEdit', `MEDICATION` = '$MedEdit', `DOC_NAME` = '$DocnmEdit', `STAT` = '$statEdit' WHERE `SNO` = '$sno';";
+    $sql = "UPDATE `MED_HISTORY` SET `S_DATE` = '$SdateEdit', `E_DATE` = '$EdateEdit', `SYMPTOMS` = ' $SympEdit', `DISEASE` = '$DiseaseEdit', `MEDICATION` = '$MedEdit', `DOC_NAME` = '$docname', `STAT` = '$statEdit' WHERE `SNO` = '$sno';";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $update = true;
@@ -83,15 +80,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["End-date"])) {
       $E_DATE = $_POST["End-date"];
     } else {
-      $E_DATE = NULL;
+      $E_DATE = ' NULL';
     }
     $SYMPTOMS = $_POST["Symptoms"];
     $DISEASE = $_POST["Disease"];
     $MEDICATION = $_POST["Medication"];
-    $DOC_NAME = $_POST["Doc-name"];
     $STAT = $_POST["status"];
 
-    $sql = "INSERT INTO `MED_HISTORY` (`S_DATE`, `E_DATE`, `SYMPTOMS`, `DISEASE`, `MEDICATION`, `DOC_NAME`, `STAT`) VALUES ('$S_DATE', '$E_DATE', '$SYMPTOMS', '$DISEASE', '$MEDICATION', '$DOC_NAME', '$STAT');";
+    $sql = "INSERT INTO `MED_HISTORY` (`AADHAR_NO`,`S_DATE`, `E_DATE`, `SYMPTOMS`, `DISEASE`, `MEDICATION`, `DOC_NAME`, `STAT`) VALUES ('$aadhar_no','$S_DATE', '$E_DATE', '$SYMPTOMS', '$DISEASE', '$MEDICATION', '$docname', '$STAT');";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $showAlert = true;
@@ -185,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div> ';
       }
-      if ($showAlert) {
+      if ($error) {
         echo '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -230,8 +226,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
                   <label class="col visually-hidden" for="MedEdit">Medication</label>
                   <input type="text" class="form-control" id="MedEdit" name="MedEdit" placeholder="Medication" required>
-                  <label class="col visually-hidden" for="DocnmEdit">Doc-name</label>
-                  <input type="text" class="form-control" id="DocnmEdit" name="DocnmEdit" placeholder="Doc-name" required>
                   <select class="form-select" id="statEdit" name="statEdit" required>
                     <option value="Active" selected>Active</option>
                     <option value="Cured">Cured</option>
@@ -259,8 +253,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="row my-3 mx-2">
             <?php
 
-            echo "<div class='card-title col h3'>AADHAR NO : " . $aadhar_no . "</div>
-                  <div class='card-title col h3'>NAME : " . $username . "</div>";
+            echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
+                  <div class='card-title col h4'>NAME : " . $username . "</div>";
             if ($userlog) {
               $_SESSION["onlyuser"] = true;
               echo "<a class='btn btn-primary card-title col-2' href='logout.php' role='button'>User logout</a>";
@@ -290,17 +284,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           <form action="/dbms_miniproject/records.php" method="POST">
                             <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
                               <label class="col visually-hidden" for="add-column">Start-date</label>
-                              <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus="(this.type="date")" onblur="(this.type="text")" required>
+                              <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus=(this.type="date") onblur=(this.type="text") required>
                               <label class="col visually-hidden" for="add-column">End-date</label>
-                              <input type="text" class="form-control" id="add-column" name="End-date" placeholder="End-date" onfocus="(this.type="date")" onblur="(this.type="text")">
+                              <input type="text" class="form-control" id="add-column" name="End-date" placeholder="End-date" onfocus=(this.type="date") onblur=(this.type="text")>
                               <label class="col visually-hidden" for="add-column">Symptoms</label>
                               <input type="text" class="form-control" id="add-column" name="Symptoms" placeholder="Symptoms" required>
                               <label class="col visually-hidden" for="add-column">Disease</label>
                               <input type="text" class="form-control" id="add-column" name="Disease" placeholder="Disease" required>
                               <label class="col visually-hidden" for="add-column">Medication</label>
                               <input type="text" class="form-control" id="add-column" name="Medication" placeholder="Medication" required>
-                              <label class="col visually-hidden" for="add-column">Doc-name</label>
-                              <input type="text" class="form-control" id="add-column" name="Doc-name" placeholder="Doc-name" required>
                               <select class="form-select" id="status" name="status" required>
                                 <option value="Active" selected>Active</option>
                                 <option value="Cured">Cured</option>
@@ -333,7 +325,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       <?php
 
                       $sno = 0;
-                      $sql = "SELECT * FROM `MED_HISTORY`";
+                      $sql = "SELECT * FROM `MED_HISTORY` WHERE `AADHAR_NO` = '$aadhar_no'";
                       $result3 = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result3)) {
                         $sno = $sno + 1;
@@ -381,7 +373,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <tbody>
                       <?php
                       $sno = 0;
-                      $sql = "SELECT * FROM `OTHER_MED`";
+                      $sql = "SELECT * FROM `OTHER_MED` WHERE `AADHAR_NO` = '$aadhar_no'";
                       $result2 = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result2)) {
                         $sno = $sno + 1;
@@ -433,7 +425,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php
 
                         $sno = 0;
-                        $sql = "SELECT * FROM `P_details`";
+                        $sql = "SELECT * FROM `P_details` WHERE `AADHAR_NO` = '$aadhar_no'";
                         $result1 = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result1)) {
                           $sno = $sno + 1;
@@ -483,15 +475,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       symptoms = tr.getElementsByTagName("td")[2].innerText;
       disease = tr.getElementsByTagName("td")[3].innerText;
       medication = tr.getElementsByTagName("td")[4].innerText;
-      docname = tr.getElementsByTagName("td")[5].innerText;
+
       stat = tr.getElementsByTagName("td")[6].innerText;
-      console.log(sdate, edate, symptoms, disease, medication, docname, stat);
+      console.log(sdate, edate, symptoms, disease, medication, stat);
       SdateEdit.value = sdate;
       EdateEdit.value = edate;
       SympEdit.value = symptoms;
       DiseaseEdit.value = disease;
       MedEdit.value = medication;
-      DocnmEdit.value = docname;
+
       statEdit.value = stat;
       snoEdit.value = e.target.id;
       console.log(e.target.id)
