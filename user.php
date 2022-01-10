@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +63,7 @@ session_start();
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $login = false;
         include 'dbconnect.php';
-        $aadhar_no = $_POST["aadhaar_no"];
+        $aadhar_no = $_POST["aadhar_no"];
 
         $sql = "Select * from user where aadhar_no='$aadhar_no'";
         $result = mysqli_query($conn, $sql);
@@ -91,8 +92,8 @@ session_start();
                     <form action="/dbms_miniproject/user.php" method="POST">
                       <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                       <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="aadhaar_no">USER ID :</span>
-                        <input type="text" required class="form-control" name="aadhaar_no" placeholder="aadhaar no " maxlength="12" minlength="12" aria-label="aadhaar_no" aria-describedby="addon-wrapping">
+                        <span class="input-group-text" id="aadhar_no">USER ID :</span>
+                        <input type="text" required class="form-control" name="aadhar_no" placeholder="aadhar no " maxlength="12" minlength="12" aria-label="aadhaar_no" aria-describedby="addon-wrapping">
                       </div>
                       <div class="pt-3 mb-4">
                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>

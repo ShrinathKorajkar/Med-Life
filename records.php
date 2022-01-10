@@ -1,6 +1,7 @@
 <?php
 // session_start();
 session_start();
+$ano = $_SESSION['aadhar_no'];
 include "dbconnect.php";
 $update = false;
 $showAlert = false;

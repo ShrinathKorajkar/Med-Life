@@ -67,8 +67,9 @@ session_start();
         $sql = "Select doc_name from doc where doc_id='$doc_id' AND passwords='$password'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
-        $doc_name = $row['doc_name'];
+        
         if ($row) {
+          $doc_name = $row['doc_name'];
 
           $login = true;
           $_SESSION['doclog'] = true;
