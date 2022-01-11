@@ -94,6 +94,30 @@
       }
     }
     ?>
+    <section>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Terms of Service</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ol class="list-group list-group-numbered">
+                <li class="list-group-item">By accessing or using the Platform or the Service, or by otherwise giving Us Your information, You confirm that You have the capacity to enter into a legally binding contract under Indian law, in particular, the Indian Contract Act, 1872, and have read, understood and agreed to the practices and policies outlined in this Privacy Policy and agree to be bound by the Privacy Policy.</li>
+                <li class="list-group-item">You hereby consent to Our collection, use, sharing, and disclosure of Your information as described in this Privacy Policy. We reserve the right to change, modify, add or delete portions of the terms of this Privacy Policy, at Our sole discretion, at any time, and any continued use of the App, the Services or the Platform, following any such amendments to the Privacy Policy, will be deemed as an implicit acceptance of the Privacy Policy in its amended form. You are requested to review the Privacy Policy from time to time to keep yourself updated with any changes; modifications made to the terms hereof.</li>
+                <li class="list-group-item">If You are accessing or using Services on the App or the Site from an overseas location, You do so at Your own risk, and shall be solely liable for compliance with any applicable local laws.</li>
+                <li class="list-group-item">If You do not agree with any of the terms and conditions of this Privacy Policy, please do not proceed further to use this Site or the App or any Services. This Privacy Policy is subject to change at any time without notice. To make sure You are aware of any changes, please review this policy on this Site or the App periodically.</li>
+              </ol>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="vh-100 ">
       <div class="container col-10 py-5 h-90">
         <div class="row  justify-content-center align-items-center h-90">
@@ -193,10 +217,12 @@
                   <div class="form-check d-flex justify-content-center m-5">
                     <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" name="form2Example3c" required />
                     <label class="form-check-label" for="form2Example3">
-                      I agree all statements in <a href="#!">Terms of service</a>
+                      I agree all statements in <button type="button" class="btn btn-light bg-light text-primary btn-outline-light text-decoration-underline" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Terms & Conditions
+                      </button>
                     </label>
                   </div>
-                  <div class="d-flex justify-content-center">
+                  <div class=" d-flex justify-content-center">
                     <button type="submit" class="btn btn-block  px-5 text-body" style="background-color:rgba(0, 0, 255, 0.507) ">Register</button>
                   </div>
               </form>
