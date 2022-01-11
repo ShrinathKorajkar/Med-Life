@@ -1,7 +1,6 @@
 <?php
-// session_start();
+// session_start
 session_start();
-$ano = $_SESSION['aadhar_no'];
 include "dbconnect.php";
 $update = false;
 $showAlert = false;
@@ -9,8 +8,8 @@ $delete = false;
 $error = false;
 $doclog = false;
 $userlog = false;
-$aadhar_no = $_SESSION['aadhar_no'];
-$docname = null;
+$aadhar_no = NULL;
+$docname = NULL;
 if (isset($_SESSION['doclog'])) {
   $doclog = true;
   $docname = $_SESSION['docname'];
@@ -18,6 +17,7 @@ if (isset($_SESSION['doclog'])) {
 
 if (isset($_SESSION['userlog'])) {
   $userlog = true;
+  $aadhar_no = $_SESSION['aadhar_no'];
   $sql = "Select `username` from `user` where `aadhar_no`='$aadhar_no'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
@@ -47,7 +47,7 @@ if (isset($_SESSION['userlog'])) {
 if (isset($_GET['delete'])) {
   $sno = $_GET['delete'];
   $delete = true;
-  $sql = "DELETE FROM `DIAGNOSE` WHERE `SNO` = $sno";
+  $sql = "DELETE FROM `MED_HISTORY` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sno = $_POST["snoEdit"];
     $TdateEdit = $_POST["TdateEdit"];
     // if (isset($_POST["EdateEdit"])) {
-      $AppeEdit = $_POST["AppeEdit"];
+    $AppeEdit = $_POST["AppeEdit"];
     // } else {
     //   $EdateEdit = NULL;
     // }
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $BP = $_POST["BP"];
     // } else {
     //   $E_DATE = ' NULL';
-    
+
     $MASS = $_POST["Mass"];
     $TEMP = $_POST["Temp"];
     $PULSE = $_POST["Pulse"];
@@ -130,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/stylesheet.css" />
 
   <title>Med Life</title>
@@ -211,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="modal-dialog modal-xl  modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -236,20 +237,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="Cured">Cured</option>
                   </select> -->
                   <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="PulseEdit">Pulse</label>
-                  <input type="text" class="form-control" id="MedEdit" name="PulseEdit" placeholder="Medication" required>
-                  <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
-                  <input type="text" class="form-control" id="MedEdit" name="RemarksEdit" placeholder="Medication" required>
-                  <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="MedicationEdit">Medication</label>
-                  <input type="text" class="form-control" id="MedEdit" name="MedicationEdit" placeholder="Medication" required>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
+                    <label class="col visually-hidden" for="PulseEdit">Pulse</label>
+                    <input type="text" class="form-control" id="MedEdit" name="PulseEdit" placeholder="Medication" required>
+                    <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                      <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
+                      <input type="text" class="form-control" id="MedEdit" name="RemarksEdit" placeholder="Medication" required>
+                      <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                        <label class="col visually-hidden" for="MedicationEdit">Medication</label>
+                        <input type="text" class="form-control" id="MedEdit" name="MedicationEdit" placeholder="Medication" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
             </form>
 
           </div>
@@ -358,8 +359,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           <td>" . $row['PULSE'] . "</td>
                           <td>" . $row['REMARKS'] . "</td>
                           <td>" . $row['MEDICATION'] . "</td>";
-                          
-                          
+
+
                         if ($doclog) {
                           echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
                         }
@@ -371,7 +372,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
               </div>
             </div>
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a>
+    </section>
+  </main>
+  <footer class="text-center text-lg-start bg-dark text-light">
+    <section class="d-flex justify-content-center justify-content-between p-4 border-bottom">
+
+      <div class="me-5">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <section>
+        <div class="about_handle">
+          <i class="bi bi-youtube">YouTube</i>&ThickSpace;|&ThickSpace;
+          <i class="bi bi-instagram">Instagram</i>&ThickSpace;|&ThickSpace;
+          <i class="bi-github" role="img" aria-label="GitHub">Github</i>&ThickSpace;|&ThickSpace;
+          <i class="bi-twitter">Twitter</i>&ThickSpace;|&ThickSpace;
+          <i class="bi-facebook">Facebook</i>&ThickSpace;|&ThickSpace;
+        </div>
+      </section>
+
+    </section>
+    <section>
+      <div class="container text-center text-md-start">
+        <div class="row">
+          <div class="col align-self-center">
+            <h4 class="text-uppercase text-center fw-bold ">
+              MEDLIFE
+            </h4>
+            <p class="lead lh-lg text-center">
+              Design, Developed, Maintained By <strong>&Tab; SHRINATH KORAJKAR </strong> And <strong> PRATHAMESH CHOUGULE </strong>
+            </p>
+          </div>
+    </section>
+    <div class="text-center " style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="#">MEDLIFE.COM</a>
+    </div>
+  </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script async src="assets/script.js"></script>
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -422,7 +465,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if (confirm("Are you sure you want to delete this entry")) {
         console.log("yes");
-        window.location = `/dbms_miniproject/diagnosis.php?delete=${sno}`;
+        window.location = `/dbms_miniproject/records.php?delete=${sno}`;
         // TODO: Create a form and use post request to submit a form
       } else {
         console.log("no");
@@ -431,7 +474,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   })
 </script>
 
-
-            
-
-</html>
+</html>s
