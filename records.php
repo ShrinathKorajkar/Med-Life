@@ -1,7 +1,6 @@
 <?php
 // session_start();
 session_start();
-$ano = $_SESSION['aadhar_no'];
 include "dbconnect.php";
 $update = false;
 $showAlert = false;
@@ -9,8 +8,8 @@ $delete = false;
 $error = false;
 $doclog = false;
 $userlog = false;
-$aadhar_no = $_SESSION['aadhar_no'];
-$docname = null;
+$aadhar_no = NULL;
+$docname = NULL;
 if (isset($_SESSION['doclog'])) {
   $doclog = true;
   $docname = $_SESSION['docname'];
