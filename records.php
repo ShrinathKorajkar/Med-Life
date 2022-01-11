@@ -127,6 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/stylesheet.css" />
 
   <title>Med Life</title>
@@ -208,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="modal-dialog modal-xl  modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Edit </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -216,28 +217,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div class="modal-body">
                 <input type="hidden" name="snoEdit" id="snoEdit">
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
-                  <label class="col visually-hidden" for="TdateEdit">T-date</label>
-                  <input type="text" class="form-control" id="TdateEdit" name="TdateEdit" placeholder="T-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                  <label class="col visually-hidden" for="AppeEdit">Appeareance</label>
-                  <input type="text" class="form-control" id="AppeEdit" name="AppeEdit" placeholder="Appeareance" required>
-                  <label class="col visually-hidden" for="BpEdit">Bp</label>
-                  <input type="text" class="form-control" id="BpEdit" name="BpEdit" placeholder="Bp" required>
-                  <label class="col visually-hidden" for="MassEdit">Mass</label>
-                  <input type="text" class="form-control" id="MassEdit" name="MassEdit" placeholder="Mass" required>
+                  <label class="col visually-hidden" for="SdateEdit">Start-date</label>
+                  <input type="text" class="form-control" id="SdateEdit" name="SdateEdit" placeholder="Start-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                  <label class="col visually-hidden" for="EdateEdit">End-date</label>
+                  <input type="text" class="form-control" id="EdateEdit" name="EdateEdit" placeholder="End-date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                  <label class="col visually-hidden" for="SympEdit">Symptoms</label>
+                  <input type="text" class="form-control" id="SympEdit" name="SympEdit" placeholder="Symptoms" required>
+                  <label class="col visually-hidden" for="DiseaseEdit">Disease</label>
+                  <input type="text" class="form-control" id="DiseaseEdit" name="DiseaseEdit" placeholder="Disease" required>
                 </div>
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                <label class="col visually-hidden" for="TempEdit">Temperature</label>
-                  <input type="text" class="form-control" id="TempEdit" name="TempEdit" placeholder="Temperature" required>
-                  <label class="col visually-hidden" for="PulseEdit">Pulse</label>
-                  <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Pulse" required>
-                  <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
-                  <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Remarks" required>
-                  <label class="col visually-hidden" for="MedicationEdit">Medication</label>
-                  <input type="text" class="form-control" id="MedicationEdit" name="MedicationEdit" placeholder="Medication" required>
-                  <!-- <select class="form-select" id="statEdit" name="statEdit" required>
+                  <label class="col visually-hidden" for="MedEdit">Medication</label>
+                  <input type="text" class="form-control" id="MedEdit" name="MedEdit" placeholder="Medication" required>
+                  <select class="form-select" id="statEdit" name="statEdit" required>
                     <option value="Active" selected>Active</option>
                     <option value="Cured">Cured</option>
-                  </select> -->
+                  </select>
+                  </select>
                 </div>
               </div>
               <div class="modal-footer">
@@ -264,11 +260,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
                   <div class='card-title col h4'>NAME : " . $username . "</div>";
             if ($userlog) {
-              $_SESSION["onlyuser"] = true;
+
               echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
             }
             if ($doclog) {
-              $_SESSION["onlyuser"] = false;
+
               echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
             }
 
@@ -448,11 +444,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </tr>";
                         }
                         ?>
-                        <!-- <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a> -->
                       </tbody>
                     </table>
-                    <!-- <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a> -->
-
                   </div>
                 </div>
               </div>
@@ -461,8 +454,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a>
     </section>
-    <!-- <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a> -->
   </main>
+  <footer class="text-center text-lg-start bg-dark text-light">
+    <section class="d-flex justify-content-center justify-content-between p-4 border-bottom">
+
+      <div class="me-5">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <section>
+        <div class="about_handle">
+          <i class="bi bi-youtube">YouTube</i>&ThickSpace;|&ThickSpace;
+          <i class="bi bi-instagram">Instagram</i>&ThickSpace;|&ThickSpace;
+          <i class="bi-github" role="img" aria-label="GitHub">Github</i>&ThickSpace;|&ThickSpace;
+          <i class="bi-twitter">Twitter</i>&ThickSpace;|&ThickSpace;
+          <i class="bi-facebook">Facebook</i>&ThickSpace;|&ThickSpace;
+        </div>
+      </section>
+
+    </section>
+    <section>
+      <div class="container text-center text-md-start">
+        <div class="row">
+          <div class="col align-self-center">
+            <h4 class="text-uppercase text-center fw-bold ">
+              MEDLIFE
+            </h4>
+            <p class="lead lh-lg text-center">
+              Design, Developed, Maintained By <strong>&Tab; SHRINATH KORAJKAR </strong> And <strong> PRATHAMESH CHOUGULE </strong>
+            </p>
+          </div>
+    </section>
+    <div class="text-center " style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="#">MEDLIFE.COM</a>
+    </div>
+  </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -487,7 +513,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       symptoms = tr.getElementsByTagName("td")[2].innerText;
       disease = tr.getElementsByTagName("td")[3].innerText;
       medication = tr.getElementsByTagName("td")[4].innerText;
-
       stat = tr.getElementsByTagName("td")[6].innerText;
       console.log(sdate, edate, symptoms, disease, medication, stat);
       SdateEdit.value = sdate;
@@ -495,7 +520,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       SympEdit.value = symptoms;
       DiseaseEdit.value = disease;
       MedEdit.value = medication;
-
       statEdit.value = stat;
       snoEdit.value = e.target.id;
       console.log(e.target.id)
