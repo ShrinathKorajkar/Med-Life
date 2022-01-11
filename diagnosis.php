@@ -47,7 +47,7 @@ if (isset($_SESSION['userlog'])) {
 if (isset($_GET['delete'])) {
   $sno = $_GET['delete'];
   $delete = true;
-  $sql = "DELETE FROM `MED_HISTORY` WHERE `SNO` = $sno";
+  $sql = "DELETE FROM `DIAGNOSE` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -420,8 +420,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
-    $('#myTable1').DataTable();
-    $('#myTable2').DataTable();
     $('#myTable3').DataTable();
 
   });
@@ -465,7 +463,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if (confirm("Are you sure you want to delete this entry")) {
         console.log("yes");
-        window.location = `/dbms_miniproject/records.php?delete=${sno}`;
+        window.location = `/dbms_miniproject/diagnosis.php?delete=${sno}`;
         // TODO: Create a form and use post request to submit a form
       } else {
         console.log("no");
