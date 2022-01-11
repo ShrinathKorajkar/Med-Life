@@ -8,13 +8,8 @@ $delete = false;
 $error = false;
 $doclog = false;
 $userlog = false;
-<<<<<<< HEAD
-$aadhar_no = $_SESSION['aadhar_no'];
-$docname = null;
-=======
 $aadhar_no = NULL;
 $docname = NULL;
->>>>>>> 1411261ccf731a54b2cd45c2be6487a3af491602
 if (isset($_SESSION['doclog'])) {
   $doclog = true;
   $docname = $_SESSION['docname'];
