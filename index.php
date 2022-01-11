@@ -1,7 +1,9 @@
 <?php
 
 include 'dbconnect.php';
-// include 'logout.php';
+session_start();
+session_unset();
+session_destroy();
 
 ?>
 
