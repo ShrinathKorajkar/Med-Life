@@ -216,22 +216,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div class="modal-body">
                 <input type="hidden" name="snoEdit" id="snoEdit">
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
-                  <label class="col visually-hidden" for="SdateEdit">Start-date</label>
-                  <input type="text" class="form-control" id="SdateEdit" name="SdateEdit" placeholder="Start-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                  <label class="col visually-hidden" for="EdateEdit">End-date</label>
-                  <input type="text" class="form-control" id="EdateEdit" name="EdateEdit" placeholder="End-date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                  <label class="col visually-hidden" for="SympEdit">Symptoms</label>
-                  <input type="text" class="form-control" id="SympEdit" name="SympEdit" placeholder="Symptoms" required>
-                  <label class="col visually-hidden" for="DiseaseEdit">Disease</label>
-                  <input type="text" class="form-control" id="DiseaseEdit" name="DiseaseEdit" placeholder="Disease" required>
+                  <label class="col visually-hidden" for="TdateEdit">T-date</label>
+                  <input type="text" class="form-control" id="TdateEdit" name="TdateEdit" placeholder="T-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                  <label class="col visually-hidden" for="AppeEdit">Appeareance</label>
+                  <input type="text" class="form-control" id="AppeEdit" name="AppeEdit" placeholder="Appeareance" required>
+                  <label class="col visually-hidden" for="BpEdit">Bp</label>
+                  <input type="text" class="form-control" id="BpEdit" name="BpEdit" placeholder="Bp" required>
+                  <label class="col visually-hidden" for="MassEdit">Mass</label>
+                  <input type="text" class="form-control" id="MassEdit" name="MassEdit" placeholder="Mass" required>
                 </div>
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="MedEdit">Medication</label>
-                  <input type="text" class="form-control" id="MedEdit" name="MedEdit" placeholder="Medication" required>
-                  <select class="form-select" id="statEdit" name="statEdit" required>
+                <label class="col visually-hidden" for="TempEdit">Temperature</label>
+                  <input type="text" class="form-control" id="TempEdit" name="TempEdit" placeholder="Temperature" required>
+                  <label class="col visually-hidden" for="PulseEdit">Pulse</label>
+                  <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Pulse" required>
+                  <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
+                  <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Remarks" required>
+                  <label class="col visually-hidden" for="MedicationEdit">Medication</label>
+                  <input type="text" class="form-control" id="MedicationEdit" name="MedicationEdit" placeholder="Medication" required>
+                  <!-- <select class="form-select" id="statEdit" name="statEdit" required>
                     <option value="Active" selected>Active</option>
                     <option value="Cured">Cured</option>
-                  </select>
+                  </select> -->
                 </div>
               </div>
               <div class="modal-footer">
