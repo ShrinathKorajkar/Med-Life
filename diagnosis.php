@@ -47,7 +47,7 @@ if (isset($_SESSION['userlog'])) {
 if (isset($_GET['delete'])) {
   $sno = $_GET['delete'];
   $delete = true;
-  $sql = "DELETE FROM `MED_HISTORY` WHERE `SNO` = $sno";
+  $sql = "DELETE FROM `DIAGNOSE` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -56,20 +56,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['snoEdit'])) {
     // Update the record
     $sno = $_POST["snoEdit"];
-    $SdateEdit = $_POST["SdateEdit"];
-    if (isset($_POST["EdateEdit"])) {
-      $EdateEdit = $_POST["EdateEdit"];
-    } else {
-      $EdateEdit = NULL;
-    }
-    $SympEdit = $_POST["SympEdit"];
-    $DiseaseEdit = $_POST["DiseaseEdit"];
-    $MedEdit = $_POST["MedEdit"];
+    $TdateEdit = $_POST["TdateEdit"];
+    // if (isset($_POST["EdateEdit"])) {
+      $AppeEdit = $_POST["AppeEdit"];
+    // } else {
+    //   $EdateEdit = NULL;
+    // }
+    $BpEdit = $_POST["BpEdit"];
+    $MassEdit = $_POST["MassEdit"];
+    $TempEdit = $_POST["TempEdit"];
 
-    $statEdit = $_POST["statEdit"];
+    $PulseEdit = $_POST["PulseEdit"];
+    $RemarksEdit = $_POST["RemarksEdit"];
+    $MedicationEdit = $_POST["MedicationEdit"];
 
     // Sql query to be executed
-    $sql = "UPDATE `MED_HISTORY` SET `S_DATE` = '$SdateEdit', `E_DATE` = '$EdateEdit', `SYMPTOMS` = ' $SympEdit', `DISEASE` = '$DiseaseEdit', `MEDICATION` = '$MedEdit', `DOC_NAME` = '$docname', `STAT` = '$statEdit' WHERE `SNO` = '$sno';";
+    $sql = "UPDATE `DIAGNOSE` SET `T_DATE` = '$TdateEdit', `APPEAREANCE` = '$AppeEdit', `BP` = ' $BpEdit', `MASS` = '$MassEdit', `TEMP` = '$TempEdit', `PULSE` = '$PulseEdit', `REMARKS` = '$RemarksEdit', `MEDICATION` = '$MedicationEdit' WHERE `SNO` = '$sno';";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $update = true;
@@ -78,18 +80,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   } else {
 
-    $S_DATE = $_POST["Start-date"];
-    if (isset($_POST["End-date"])) {
-      $E_DATE = $_POST["End-date"];
-    } else {
-      $E_DATE = 'NULL';
-    }
-    $SYMPTOMS = $_POST["Symptoms"];
-    $DISEASE = $_POST["Disease"];
+    $T_DATE = $_POST["T_date"];
+    $APPEAREANCE = $_POST["Appeareance"];
+    $BP = $_POST["BP"];
+    // } else {
+    //   $E_DATE = ' NULL';
+    
+    $MASS = $_POST["Mass"];
+    $TEMP = $_POST["Temp"];
+    $PULSE = $_POST["Pulse"];
+    $REMARKS = $_POST["Remarks"];
     $MEDICATION = $_POST["Medication"];
-    $STAT = $_POST["status"];
 
-    $sql = "INSERT INTO `MED_HISTORY` (`AADHAR_NO`,`S_DATE`, `E_DATE`, `SYMPTOMS`, `DISEASE`, `MEDICATION`, `DOC_NAME`, `STAT`) VALUES ('$aadhar_no','$S_DATE', '$E_DATE', '$SYMPTOMS', '$DISEASE', '$MEDICATION', '$docname', '$STAT');";
+    $sql = "INSERT INTO `DIAGNOSE` (`AADHAR_NO`,`T_DATE`, `APPEAREANCE`, `BP`, `MASS`, `TEMP`, `PULSE`, `REMARKS`, `MEDICATION`) VALUES ('$aadhar_no','$T_DATE', '$APPEAREANCE', '$BP', '$MASS', '$TEMP', '$PULSE', '$REMARKS', '$MEDICATION');";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $showAlert = true;
@@ -212,26 +215,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="/dbms_miniproject/records.php" method="post">
+            <form action="/dbms_miniproject/diagnosis.php" method="post">
               <div class="modal-body">
                 <input type="hidden" name="snoEdit" id="snoEdit">
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
-                  <label class="col visually-hidden" for="SdateEdit">Start-date</label>
-                  <input type="text" class="form-control" id="SdateEdit" name="SdateEdit" placeholder="Start-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                  <label class="col visually-hidden" for="EdateEdit">End-date</label>
-                  <input type="text" class="form-control" id="EdateEdit" name="EdateEdit" placeholder="End-date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                  <label class="col visually-hidden" for="SympEdit">Symptoms</label>
-                  <input type="text" class="form-control" id="SympEdit" name="SympEdit" placeholder="Symptoms" required>
-                  <label class="col visually-hidden" for="DiseaseEdit">Disease</label>
-                  <input type="text" class="form-control" id="DiseaseEdit" name="DiseaseEdit" placeholder="Disease" required>
+                  <label class="col visually-hidden" for="TdateEdit">T-date</label>
+                  <input type="text" class="form-control" id="TdateEdit" name="TdateEdit" placeholder="T-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                  <label class="col visually-hidden" for="AppeEdit">Appeareance-date</label>
+                  <input type="text" class="form-control" id="EdateEdit" name="AppeEdit" placeholder="End-date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                  <label class="col visually-hidden" for="BpEdit">BP</label>
+                  <input type="text" class="form-control" id="SympEdit" name="BpEdit" placeholder="Symptoms" required>
+                  <label class="col visually-hidden" for="MassEdit">Mass</label>
+                  <input type="text" class="form-control" id="DiseaseEdit" name="MassEdit" placeholder="Disease" required>
                 </div>
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="MedEdit">Medication</label>
-                  <input type="text" class="form-control" id="MedEdit" name="MedEdit" placeholder="Medication" required>
-                  <select class="form-select" id="statEdit" name="statEdit" required>
+                  <label class="col visually-hidden" for="TempEdit">Temperature</label>
+                  <input type="text" class="form-control" id="MedEdit" name="TempEdit" placeholder="Medication" required>
+                  <!-- <select class="form-select" id="statEdit" name="statEdit" required>
                     <option value="Active" selected>Active</option>
                     <option value="Cured">Cured</option>
-                  </select>
+                  </select> -->
+                  <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                  <label class="col visually-hidden" for="PulseEdit">Pulse</label>
+                  <input type="text" class="form-control" id="MedEdit" name="PulseEdit" placeholder="Medication" required>
+                  <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                  <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
+                  <input type="text" class="form-control" id="MedEdit" name="RemarksEdit" placeholder="Medication" required>
+                  <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                  <label class="col visually-hidden" for="MedicationEdit">Medication</label>
+                  <input type="text" class="form-control" id="MedEdit" name="MedicationEdit" placeholder="Medication" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -272,7 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <h5 class="card-title">MEDICAL HISTORY</h5>
+                  <h5 class="card-title">DIAGNOSIS</h5>
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -283,39 +295,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo '<div class="container-fluid mt-3 mb-5">
                  
                           <h5 class="card-text">Add New entry</h5>
-                          <form action="/dbms_miniproject/records.php" method="POST">
+                          <form action="/dbms_miniproject/diagnosis.php" method="POST">
                             <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                              <label class="col visually-hidden" for="add-column">Start-date</label>
-                              <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus=(this.type="date") onblur=(this.type="text") required>
-                              <label class="col visually-hidden" for="add-column">End-date</label>
-                              <input type="text" class="form-control" id="add-column" name="End-date" placeholder="End-date" onfocus=(this.type="date") onblur=(this.type="text")>
-                              <label class="col visually-hidden" for="add-column">Symptoms</label>
-                              <input type="text" class="form-control" id="add-column" name="Symptoms" placeholder="Symptoms" required>
-                              <label class="col visually-hidden" for="add-column">Disease</label>
-                              <input type="text" class="form-control" id="add-column" name="Disease" placeholder="Disease" required>
+                              <label class="col visually-hidden" for="add-column">T-date</label>
+                              <input type="text" class="form-control" id="add-column" name="T-date" placeholder="T-date" onfocus=(this.type="date") onblur=(this.type="text") required>
+                              <label class="col visually-hidden" for="add-column">Appeareance</label>
+                              <input type="text" class="form-control" id="add-column" name="Appeareance" placeholder="Appeareance" required>
+                              <label class="col visually-hidden" for="add-column">BP</label>
+                              <input type="text" class="form-control" id="add-column" name="BP" placeholder="BP" required>
+                              <label class="col visually-hidden" for="add-column">Mass</label>
+                              <input type="text" class="form-control" id="add-column" name="Mass" placeholder="Mass" required>
+                              <label class="col visually-hidden" for="add-column">Temperature</label>
+                              <input type="text" class="form-control" id="add-column" name="Temp" placeholder="Temperature" required>
+                              <label class="col visually-hidden" for="add-column">Pulse</label>
+                              <input type="text" class="form-control" id="add-column" name="Pulse" placeholder="Pulse" required>
+                              
+                              <label class="col visually-hidden" for="add-column">Remarks</label>
+                              <input type="text" class="form-control" id="add-column" name="Remarks" placeholder="Remarks" required>
                               <label class="col visually-hidden" for="add-column">Medication</label>
                               <input type="text" class="form-control" id="add-column" name="Medication" placeholder="Medication" required>
-                              <select class="form-select" id="status" name="status" required>
-                                <option value="Active" selected>Active</option>
-                                <option value="Cured">Cured</option>
-                              </select>
                               <button type="submit" class="btn col btn-primary">ADD</button>
                             </div>
                           </form>
                         </div>';
                   }
                   ?>
-                  <table class="table table-dark table-hover table-striped" id="myTable3">
+                  <table class="table table-dark" id="myTable3">
                     <thead>
                       <tr>
                         <th scope="col">Sno</th>
-                        <th scope="col">Start-date</th>
-                        <th scope="col">End-date</th>
-                        <th scope="col">Symptoms</th>
-                        <th scope="col">Disease</th>
-                        <th scope="col">Medication</th>
-                        <th scope="col">Doc-name</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">T_DATE</th>
+                        <th scope="col">APPEAREANCE</th>
+                        <th scope="col">BP</th>
+                        <th scope="col">MASS</th>
+                        <th scope="col">TEMP</th>
+                        <th scope="col">PULSE</th>
+                        <th scope="col">REMARKS</th>
+                        <th scope="col">MEDICATION</th>
                         <?php
                         if ($doclog) {
                           echo "<th scope='col'>Edit</th>";
@@ -327,23 +343,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       <?php
 
                       $sno = 0;
-                      $sql = "SELECT * FROM `MED_HISTORY` WHERE `AADHAR_NO` = '$aadhar_no'";
+                      $sql = "SELECT * FROM `DIAGNOSE` WHERE `AADHAR_NO` = '$aadhar_no'";
                       $result3 = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result3)) {
                         $sno = $sno + 1;
                         echo "<tr>
-                          <th scope='row'>" .  $row['S_DATE'] . "</th>
-                          <td>" . $row['S_DATE'] . " </td>";
-                        if ($row['E_DATE'] == NULL) {
-                          echo "<td>Active</td>";
-                        } else {
-                          echo "<td>" . $row['E_DATE'] . "</td>";
-                        }
-                        echo "<td>" . $row['SYMPTOMS'] . "</td>
-                          <td>" . $row['DISEASE'] . "</td>
-                          <td>" . $row['MEDICATION'] . "</td>
-                          <td>" . $row['DOC_NAME'] . "</td>
-                          <td>" . $row['STAT'] . "</td>";
+                          <th scope='row'>" .  $row['SNO'] . "</th>
+                          <td>" . $row['T_DATE'] . " </td>
+                           <td>" . $row['APPEAREANCE'] . "</td>
+                        
+                          <td>" . $row['BP'] . "</td>
+                          <td>" . $row['MASS'] . "</td>
+                          <td>" . $row['TEMP'] . "</td>
+                          <td>" . $row['PULSE'] . "</td>
+                          <td>" . $row['REMARKS'] . "</td>
+                          <td>" . $row['MEDICATION'] . "</td>";
+                          
+                          
                         if ($doclog) {
                           echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
                         }
@@ -355,110 +371,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <h5 class="card-title">INJURY, ALLERGIES, AND DAILY MEDS</h5>
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body my-4">
-                  <table class="table table-dark table-hover table-striped" id="myTable2">
-                    <thead>
-                      <tr>
-                        <th scope="col">Sno</th>
-                        <th scope="col">Daily meds</th>
-                        <th scope="col">Allergies</th>
-                        <th scope="col">PREVIOUS INJURY</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $sno = 0;
-                      $sql = "SELECT * FROM `OTHER_MED` WHERE `AADHAR_NO` = '$aadhar_no'";
-                      $result2 = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_assoc($result2)) {
-                        $sno = $sno + 1;
-                        echo "<tr>";
-                        echo "<th scope='row'>" . $sno . "</th>";
-                        if ($row['MEDS'] == NULL) {
-                          echo "<td>NONE</td>";
-                        } else {
-                          echo "<td>" . $row['MEDS'] . "</td>";
-                        }
-                        if ($row['ALLERGIES'] == NULL) {
-                          echo "<td>NONE</td>";
-                        } else {
-                          echo "<td>" . $row['ALLERGIES'] . "</td>";
-                        }
-                        if ($row['INJURY'] == NULL) {
-                          echo "<td>NONE</td>";
-                        } else {
-                          echo "<td>" . $row['INJURY'] . " </td>";
-                        }
-                        echo "</tr>";
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <h5 class="card-title">PERSONAL DETAILS</h5>
-                  </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <table class="table table-dark table-hover table-striped" id="myTable1">
-                      <thead>
-                        <tr>
-                          <th scope="col">Sno</th>
-                          <th scope="col">Age</th>
-                          <th scope="col">Blood type</th>
-                          <th scope="col">D.O.B</th>
-                          <th scope="col">Gender</th>
-                          <th scope="col">Phone-no</th>
-                          <th scope="col">Emergency-no</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-
-                        $sno = 0;
-                        $sql = "SELECT * FROM `P_details` WHERE `AADHAR_NO` = '$aadhar_no'";
-                        $result1 = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result1)) {
-                          $sno = $sno + 1;
-                          echo "<tr>
-                          <th scope='row'>" . $sno . "</th>
-                          <td>" . $row['AGE'] . " </td>
-                          <td>" . $row['BLOOD_GRP'] . "</td>
-                          <td>" . $row['DOB'] . "</td>
-                          <td>" . $row['GENDER'] . "</td>
-                          <td>" . $row['CONTACT_NO'] . "</td>
-                          <td>" . $row['ECONTACT_NO'] . "</td>
-                        </tr>";
-                        }
-                        ?>
-                        <!-- <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a> -->
-                      </tbody>
-                    </table>
-                    <!-- <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a> -->
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a>
-    </section>
-    <!-- <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a> -->
-  </main>
-</body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script async src="assets/script.js"></script>
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -476,21 +389,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     element.addEventListener("click", (e) => {
       console.log("edit ");
       tr = e.target.parentNode.parentNode.parentNode;
-      sdate = tr.getElementsByTagName("td")[0].innerText;
-      edate = tr.getElementsByTagName("td")[1].innerText;
-      symptoms = tr.getElementsByTagName("td")[2].innerText;
-      disease = tr.getElementsByTagName("td")[3].innerText;
-      medication = tr.getElementsByTagName("td")[4].innerText;
+      tdate = tr.getElementsByTagName("td")[0].innerText;
+      appeareance = tr.getElementsByTagName("td")[1].innerText;
+      bp = tr.getElementsByTagName("td")[2].innerText;
+      mass = tr.getElementsByTagName("td")[3].innerText;
+      temp = tr.getElementsByTagName("td")[4].innerText;
+      pulse = tr.getElementsByTagName("td")[5].innerText;
 
-      stat = tr.getElementsByTagName("td")[6].innerText;
-      console.log(sdate, edate, symptoms, disease, medication, stat);
-      SdateEdit.value = sdate;
-      EdateEdit.value = edate;
-      SympEdit.value = symptoms;
-      DiseaseEdit.value = disease;
-      MedEdit.value = medication;
+      remarks = tr.getElementsByTagName("td")[6].innerText;
+      medication = tr.getElementsByTagName("td")[7].innerText;
+      console.log(tdate, appeareance, bp, mass, temp, pulse, remarks, medication);
+      TdateEdit.value = tdate;
+      AppeEdit.value = appeareance;
+      BpEdit.value = bp;
+      MassEdit.value = mass;
+      TempEdit.value = temp;
+      PulseEdit.value = pulse;
+      RemarksEdit.value = remarks;
 
-      statEdit.value = stat;
+      MedicationEdit.value = medication;
       snoEdit.value = e.target.id;
       console.log(e.target.id)
       $('#exampleModal').modal('toggle');
@@ -505,7 +422,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if (confirm("Are you sure you want to delete this entry")) {
         console.log("yes");
-        window.location = `/dbms_miniproject/records.php?delete=${sno}`;
+        window.location = `/dbms_miniproject/diagnosis.php?delete=${sno}`;
         // TODO: Create a form and use post request to submit a form
       } else {
         console.log("no");
@@ -514,4 +431,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   })
 </script>
 
-</html>s
+
+            
+
+</html>
