@@ -1,5 +1,5 @@
 <?php
-// session_start();
+// session_start
 session_start();
 include "dbconnect.php";
 $update = false;
@@ -17,6 +17,7 @@ if (isset($_SESSION['doclog'])) {
 
 if (isset($_SESSION['userlog'])) {
   $userlog = true;
+  $aadhar_no = $_SESSION['aadhar_no'];
   $sql = "Select `username` from `user` where `aadhar_no`='$aadhar_no'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
@@ -258,11 +259,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <div class='card-title col h4'>NAME : " . $username . "</div>";
             if ($userlog) {
               $_SESSION["onlyuser"] = true;
-              echo "<a class='btn btn-primary card-title col-2' href='logout.php' role='button'>User logout</a>";
+              echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
             }
             if ($doclog) {
               $_SESSION["onlyuser"] = false;
-              echo "<a class='btn btn-primary card-title col col-2' href='logout.php' role='button'>Doc logout</a>";
+              echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
             }
 
             ?>
