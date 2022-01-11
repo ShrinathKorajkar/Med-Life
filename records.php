@@ -1,6 +1,7 @@
 <?php
 // session_start();
 session_start();
+$ano = $_SESSION['aadhar_no'];
 include "dbconnect.php";
 $update = false;
 $showAlert = false;
@@ -8,13 +9,8 @@ $delete = false;
 $error = false;
 $doclog = false;
 $userlog = false;
-<<<<<<< HEAD
 $aadhar_no = $_SESSION['aadhar_no'];
 $docname = null;
-=======
-$aadhar_no = NULL;
-$docname = NULL;
->>>>>>> 1411261ccf731a54b2cd45c2be6487a3af491602
 if (isset($_SESSION['doclog'])) {
   $doclog = true;
   $docname = $_SESSION['docname'];
@@ -22,7 +18,6 @@ if (isset($_SESSION['doclog'])) {
 
 if (isset($_SESSION['userlog'])) {
   $userlog = true;
-  $aadhar_no = $_SESSION['aadhar_no'];
   $sql = "Select `username` from `user` where `aadhar_no`='$aadhar_no'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
@@ -263,12 +258,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
                   <div class='card-title col h4'>NAME : " . $username . "</div>";
             if ($userlog) {
-
-              echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
+              $_SESSION["onlyuser"] = true;
+              echo "<a class='btn btn-primary card-title col-2' href='logout.php' role='button'>User logout</a>";
             }
             if ($doclog) {
-
-              echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
+              $_SESSION["onlyuser"] = false;
+              echo "<a class='btn btn-primary card-title col col-2' href='logout.php' role='button'>Doc logout</a>";
             }
 
             ?>
@@ -337,7 +332,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       while ($row = mysqli_fetch_assoc($result3)) {
                         $sno = $sno + 1;
                         echo "<tr>
-                          <th scope='row'>" .  $row['S_DATE'] . "</th>
+                          <th scope='row'>" .  $sno . "</th>
                           <td>" . $row['S_DATE'] . " </td>";
                         if ($row['E_DATE'] == NULL) {
                           echo "<td>Active</td>";
