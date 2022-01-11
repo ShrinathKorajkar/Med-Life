@@ -219,18 +219,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div class="modal-body">
                 <input type="hidden" name="snoEdit" id="snoEdit">
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
-                  <label class="col visually-hidden" for="TdateEdit">T-date</label>
-                  <input type="text" class="form-control" id="TdateEdit" name="TdateEdit" placeholder="T-date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                  <label class="col visually-hidden" for="TdateEdit">T_date</label>
+                  <input type="text" class="form-control" id="TdateEdit" name="TdateEdit" placeholder="T_date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
                   <label class="col visually-hidden" for="AppeEdit">Appeareance-date</label>
-                  <input type="text" class="form-control" id="EdateEdit" name="AppeEdit" placeholder="End-date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                  <input type="text" class="form-control" id="EdateEdit" name="AppeEdit" placeholder="Appeareance" required>
                   <label class="col visually-hidden" for="BpEdit">BP</label>
-                  <input type="text" class="form-control" id="SympEdit" name="BpEdit" placeholder="Symptoms" required>
+                  <input type="text" class="form-control" id="SympEdit" name="BpEdit" placeholder="Bp" required>
                   <label class="col visually-hidden" for="MassEdit">Mass</label>
-                  <input type="text" class="form-control" id="DiseaseEdit" name="MassEdit" placeholder="Disease" required>
+                  <input type="text" class="form-control" id="DiseaseEdit" name="MassEdit" placeholder="Mass" required>
                 </div>
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
                   <label class="col visually-hidden" for="TempEdit">Temperature</label>
-                  <input type="text" class="form-control" id="MedEdit" name="TempEdit" placeholder="Medication" required>
+                  <input type="text" class="form-control" id="MedEdit" name="TempEdit" placeholder="Temperature" required>
                   <!-- <select class="form-select" id="statEdit" name="statEdit" required>
                     <option value="Active" selected>Active</option>
                     <option value="Cured">Cured</option>
@@ -271,11 +271,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <div class='card-title col h4'>NAME : " . $username . "</div>";
             if ($userlog) {
               $_SESSION["onlyuser"] = true;
-              echo "<a class='btn btn-primary card-title col-2' href='logout.php' role='button'>User logout</a>";
+              echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
             }
             if ($doclog) {
               $_SESSION["onlyuser"] = false;
-              echo "<a class='btn btn-primary card-title col col-2' href='logout.php' role='button'>Doc logout</a>";
+              echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
             }
 
             ?>
@@ -297,8 +297,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           <h5 class="card-text">Add New entry</h5>
                           <form action="/dbms_miniproject/diagnosis.php" method="POST">
                             <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                              <label class="col visually-hidden" for="add-column">T-date</label>
-                              <input type="text" class="form-control" id="add-column" name="T-date" placeholder="T-date" onfocus=(this.type="date") onblur=(this.type="text") required>
+                              <label class="col visually-hidden" for="add-column">T_date</label>
+                              <input type="text" class="form-control" id="add-column" name="T_date" placeholder="T_date" onfocus=(this.type="date") onblur=(this.type="text") required>
                               <label class="col visually-hidden" for="add-column">Appeareance</label>
                               <input type="text" class="form-control" id="add-column" name="Appeareance" placeholder="Appeareance" required>
                               <label class="col visually-hidden" for="add-column">BP</label>
