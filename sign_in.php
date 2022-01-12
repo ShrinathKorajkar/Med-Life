@@ -47,7 +47,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">help</a>
+                <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
               </li>
           </div>
         </div>
