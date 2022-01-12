@@ -46,9 +46,11 @@ if (isset($_SESSION['userlog'])) {
 
 if (isset($_GET['delete'])) {
   $sno = $_GET['delete'];
-  $delete = true;
   $sql = "DELETE FROM `MED_HISTORY` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
+  if ($result) {
+    $delete = true;
+  }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -156,7 +158,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">help</a>
+                <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
               </li>
           </div>
         </div>
@@ -307,7 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>';
                   }
                   ?>
-                  <table class="table table-dark table-hover table-striped" id="myTable3">
+                  <table class="table table-dark table-hover table-striped" id="myTable1">
                     <thead>
                       <tr>
                         <th scope="col">Sno</th>
@@ -368,7 +376,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <table class="table table-dark table-hover table-striped" id="myTable2">
                     <thead>
                       <tr>
-                        <th scope="col">Sno</th>
                         <th scope="col">Daily meds</th>
                         <th scope="col">Allergies</th>
                         <th scope="col">PREVIOUS INJURY</th>
@@ -380,9 +387,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       $sql = "SELECT * FROM `OTHER_MED` WHERE `AADHAR_NO` = '$aadhar_no'";
                       $result2 = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result2)) {
-                        $sno = $sno + 1;
+
                         echo "<tr>";
-                        echo "<th scope='row'>" . $sno . "</th>";
                         if ($row['MEDS'] == NULL) {
                           echo "<td>NONE</td>";
                         } else {
@@ -416,7 +422,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <table class="table table-dark table-hover table-striped" id="myTable1">
                       <thead>
                         <tr>
-                          <th scope="col">Sno</th>
                           <th scope="col">Age</th>
                           <th scope="col">Blood type</th>
                           <th scope="col">D.O.B</th>
@@ -432,9 +437,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $sql = "SELECT * FROM `P_details` WHERE `AADHAR_NO` = '$aadhar_no'";
                         $result1 = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result1)) {
-                          $sno = $sno + 1;
                           echo "<tr>
-                          <th scope='row'>" . $sno . "</th>
                           <td>" . $row['AGE'] . " </td>
                           <td>" . $row['BLOOD_GRP'] . "</td>
                           <td>" . $row['DOB'] . "</td>
@@ -451,8 +454,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
             </div>
           </div>
+          <div class="container row justify-content-end mb-4">
+            <?php
+            if ($doclog) {
+              echo '<a class="btn btn-success col col-2" href="diagnosis.php" role="button">Diagnose</a>';
+            }
+            ?>
+          </div>
         </div>
-        <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a>
     </section>
   </main>
   <footer class="text-center text-lg-start bg-dark text-light">
@@ -497,8 +506,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
   $(document).ready(function() {
     $('#myTable1').DataTable();
-    $('#myTable2').DataTable();
-    $('#myTable3').DataTable();
 
   });
 </script>

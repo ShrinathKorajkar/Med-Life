@@ -49,7 +49,10 @@ session_start();
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">help</a>
+                <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
               </li>
           </div>
         </div>
@@ -105,10 +108,7 @@ session_start();
                       <div class="pt-3 mb-4">
                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                       </div>
-                      <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="sign_in.php" style="color: #393f81;">Register here</a></p>
-
                     </form>
-
                   </div>
                 </div>
               </div>

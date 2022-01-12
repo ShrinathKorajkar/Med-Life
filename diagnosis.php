@@ -6,15 +6,14 @@ $update = false;
 $showAlert = false;
 $delete = false;
 $error = false;
-$doclog = false;
 $userlog = false;
 $aadhar_no = NULL;
+$doclog = false;
 $docname = NULL;
 if (isset($_SESSION['doclog'])) {
   $doclog = true;
   $docname = $_SESSION['docname'];
 }
-
 if (isset($_SESSION['userlog'])) {
   $userlog = true;
   $aadhar_no = $_SESSION['aadhar_no'];
@@ -46,9 +45,11 @@ if (isset($_SESSION['userlog'])) {
 
 if (isset($_GET['delete'])) {
   $sno = $_GET['delete'];
-  $delete = true;
   $sql = "DELETE FROM `DIAGNOSE` WHERE `SNO` = $sno";
   $result = mysqli_query($conn, $sql);
+  if ($result) {
+    $delete = true;
+  }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -56,22 +57,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['snoEdit'])) {
     // Update the record
     $sno = $_POST["snoEdit"];
-    $TdateEdit = $_POST["TdateEdit"];
-    // if (isset($_POST["EdateEdit"])) {
     $AppeEdit = $_POST["AppeEdit"];
-    // } else {
-    //   $EdateEdit = NULL;
-    // }
     $BpEdit = $_POST["BpEdit"];
     $MassEdit = $_POST["MassEdit"];
     $TempEdit = $_POST["TempEdit"];
-
     $PulseEdit = $_POST["PulseEdit"];
     $RemarksEdit = $_POST["RemarksEdit"];
     $MedicationEdit = $_POST["MedicationEdit"];
 
     // Sql query to be executed
-    $sql = "UPDATE `DIAGNOSE` SET `T_DATE` = '$TdateEdit', `APPEAREANCE` = '$AppeEdit', `BP` = ' $BpEdit', `MASS` = '$MassEdit', `TEMP` = '$TempEdit', `PULSE` = '$PulseEdit', `REMARKS` = '$RemarksEdit', `MEDICATION` = '$MedicationEdit' WHERE `SNO` = '$sno';";
+    $sql = "UPDATE `DIAGNOSE` SET  `APPEAREANCE` = '$AppeEdit', `BP` = ' $BpEdit', `MASS` = '$MassEdit', `TEMP` = '$TempEdit', `PULSE` = '$PulseEdit', `REMARKS` = '$RemarksEdit', `MEDICATION` = '$MedicationEdit' WHERE `SNO` = '$sno';";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $update = true;
@@ -80,12 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   } else {
 
-    $T_DATE = $_POST["T_date"];
+    $T_DATE = date("Y-m-d");
     $APPEAREANCE = $_POST["Appeareance"];
     $BP = $_POST["BP"];
-    // } else {
-    //   $E_DATE = ' NULL';
-
     $MASS = $_POST["Mass"];
     $TEMP = $_POST["Temp"];
     $PULSE = $_POST["Pulse"];
@@ -159,7 +151,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">help</a>
+                <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
               </li>
           </div>
         </div>
@@ -220,37 +218,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div class="modal-body">
                 <input type="hidden" name="snoEdit" id="snoEdit">
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
-                  <label class="col visually-hidden" for="TdateEdit">T_date</label>
-                  <input type="text" class="form-control" id="TdateEdit" name="TdateEdit" placeholder="T_date" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                  <label class="col visually-hidden" for="AppeEdit">Appeareance-date</label>
-                  <input type="text" class="form-control" id="EdateEdit" name="AppeEdit" placeholder="Appeareance" required>
+                  <label class="col visually-hidden" for="AppeEdit">Appeareance</label>
+                  <input type="text" class="form-control" id="AppeEdit" name="AppeEdit" placeholder="Appeareance" required>
                   <label class="col visually-hidden" for="BpEdit">BP</label>
-                  <input type="text" class="form-control" id="SympEdit" name="BpEdit" placeholder="Bp" required>
+                  <input type="text" class="form-control" id="BpEdit" name="BpEdit" placeholder="Bp" required>
                   <label class="col visually-hidden" for="MassEdit">Mass</label>
-                  <input type="text" class="form-control" id="DiseaseEdit" name="MassEdit" placeholder="Mass" required>
+                  <input type="text" class="form-control" id="MassEdit" name="MassEdit" placeholder="Mass" required>
+                  <label class="col visually-hidden" for="TempEdit">Temperature</label>
+                  <input type="text" class="form-control" id="TempEdit" name="TempEdit" placeholder="Temperature" required>s
                 </div>
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="TempEdit">Temperature</label>
-                  <input type="text" class="form-control" id="MedEdit" name="TempEdit" placeholder="Temperature" required>
-                  <!-- <select class="form-select" id="statEdit" name="statEdit" required>
-                    <option value="Active" selected>Active</option>
-                    <option value="Cured">Cured</option>
-                  </select> -->
-                  <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                    <label class="col visually-hidden" for="PulseEdit">Pulse</label>
-                    <input type="text" class="form-control" id="MedEdit" name="PulseEdit" placeholder="Medication" required>
-                    <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                      <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
-                      <input type="text" class="form-control" id="MedEdit" name="RemarksEdit" placeholder="Medication" required>
-                      <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                        <label class="col visually-hidden" for="MedicationEdit">Medication</label>
-                        <input type="text" class="form-control" id="MedEdit" name="MedicationEdit" placeholder="Medication" required>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+                  <label class="col visually-hidden" for="PulseEdit">Pulse</label>
+                  <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Medication" required>
+                  <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
+                  <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Medication" required>
+                  <label class="col visually-hidden" for="MedicationEdit">Medication</label>
+                  <input type="text" class="form-control" id="MedicationEdit" name="MedicationEdit" placeholder="Medication" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
             </form>
 
           </div>
@@ -270,12 +259,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
                   <div class='card-title col h4'>NAME : " . $username . "</div>";
-            // if ($userlog) {
-            //   $_SESSION["onlyuser"] = true;
-            //   echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
-            // }
+            if ($userlog) {
+
+              echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
+            }
             if ($doclog) {
-              $_SESSION["onlyuser"] = false;
+
               echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
             }
 
@@ -293,13 +282,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <?php
 
                   if ($doclog) {
-                    echo '<div class="container-fluid mt-3 mb-5">
+                    echo '<div class="container-fluid mt-2 mb-5">
                  
                           <h5 class="card-text">Add New entry</h5>
                           <form action="/dbms_miniproject/diagnosis.php" method="POST">
                             <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                              <label class="col visually-hidden" for="add-column">T_date</label>
-                              <input type="text" class="form-control" id="add-column" name="T_date" placeholder="T_date" onfocus=(this.type="date") onblur=(this.type="text") required>
                               <label class="col visually-hidden" for="add-column">Appeareance</label>
                               <input type="text" class="form-control" id="add-column" name="Appeareance" placeholder="Appeareance" required>
                               <label class="col visually-hidden" for="add-column">BP</label>
@@ -321,16 +308,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>';
                   }
                   ?>
-                  <table class="table table-dark" id="myTable3">
+                  <table class="table table-dark" id="myTable1">
                     <thead>
                       <tr>
                         <th scope="col">Sno</th>
                         <th scope="col">T_DATE</th>
                         <th scope="col">APPEAREANCE</th>
-                        <th scope="col">BP</th>
-                        <th scope="col">MASS</th>
-                        <th scope="col">TEMP</th>
-                        <th scope="col">PULSE</th>
+                        <th scope="col" class="text-center"> BP (mm/Hg)</th>
+                        <th scope="col" class="text-center">MASS (kg)</th>
+                        <th scope="col" class="text-center">TEMP (°C)</th>
+                        <th scope="col" class="text-center">PULSE (bpm)</th>
                         <th scope="col">REMARKS</th>
                         <th scope="col">MEDICATION</th>
                         <?php
@@ -349,7 +336,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       while ($row = mysqli_fetch_assoc($result3)) {
                         $sno = $sno + 1;
                         echo "<tr>
-                          <th scope='row'>" .  $row['SNO'] . "</th>
+                          <th scope='row'>" .  $sno . "</th>
                           <td>" . $row['T_DATE'] . " </td>
                            <td>" . $row['APPEAREANCE'] . "</td>
                         
@@ -374,9 +361,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
           </div>
+          <div class="container mb-4">
+            <?php
+            if ($doclog) {
+              echo '<a class="btn btn-success col col-2" href="records.php" role="button">Records</a>';
+            }
+            ?>
+          </div>
         </div>
       </div>
-      <a class="btn btn-primary col col-2" href="diagnosis.php" role="button">Diagnosis</a>
+
     </section>
   </main>
   <footer class="text-center text-lg-start bg-dark text-light">
@@ -420,7 +414,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
-    $('#myTable3').DataTable();
+    $('#myTable1').DataTable();
 
   });
 </script>
@@ -430,7 +424,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     element.addEventListener("click", (e) => {
       console.log("edit ");
       tr = e.target.parentNode.parentNode.parentNode;
-      tdate = tr.getElementsByTagName("td")[0].innerText;
       appeareance = tr.getElementsByTagName("td")[1].innerText;
       bp = tr.getElementsByTagName("td")[2].innerText;
       mass = tr.getElementsByTagName("td")[3].innerText;
@@ -439,8 +432,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       remarks = tr.getElementsByTagName("td")[6].innerText;
       medication = tr.getElementsByTagName("td")[7].innerText;
-      console.log(tdate, appeareance, bp, mass, temp, pulse, remarks, medication);
-      TdateEdit.value = tdate;
+      console.log(appeareance, bp, mass, temp, pulse, remarks, medication);
       AppeEdit.value = appeareance;
       BpEdit.value = bp;
       MassEdit.value = mass;
