@@ -270,10 +270,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
                   <div class='card-title col h4'>NAME : " . $username . "</div>";
-            if ($userlog) {
-              $_SESSION["onlyuser"] = true;
-              echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
-            }
+            // if ($userlog) {
+            //   $_SESSION["onlyuser"] = true;
+            //   echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
+            // }
             if ($doclog) {
               $_SESSION["onlyuser"] = false;
               echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
