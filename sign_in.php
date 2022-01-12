@@ -78,7 +78,7 @@
           INSERT INTO `user` (`AADHAR_NO`, `USERNAME`) VALUES ('$aadhaar', '$name')";
       $result = mysqli_query($conn, $sql);
       // $result1 = mysqli_query($conn, $sql1);
-      if ($result) {
+      if ($result1) {
         $showAlert = true;
       }
       if ($showAlert) {

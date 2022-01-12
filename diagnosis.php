@@ -229,9 +229,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
                   <label class="col visually-hidden" for="PulseEdit">Pulse</label>
-                  <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Medication" required>
+                  <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Pulse" required>
                   <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
-                  <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Medication" required>
+                  <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Remarks" required>
                   <label class="col visually-hidden" for="MedicationEdit">Medication</label>
                   <input type="text" class="form-control" id="MedicationEdit" name="MedicationEdit" placeholder="Medication" required>
                 </div>
