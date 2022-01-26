@@ -83,14 +83,24 @@ INSERT INTO P_DETAILS (AADHAR_NO, AGE, BLOOD_GRP, DOB, CONTACT_NO, ECONTACT_NO, 
 ('697967634778','58','O +ve','1963-04-08','9591690590','7619153471','Female');
 
 INSERT INTO DIAGNOSE (AADHAR_NO, T_DATE, APPEAREANCE, BP, MASS, TEMP, PULSE, REMARKS, MEDICATION) VALUES
-('945632840305','2022-01-05','Swollen inside mouth','100/60','62','37','78','none','B-complex');
+('945632840305','2021-01-05','Swollen inside mouth','100/60','62','37','78','Improvement','B-complex'),
+('646787204425','2021-01-12','skin rashes','100/69','55','92','60','Better than before','dicloxacillin'),
+('943208807080','2021-01-25','feelings of sadness','100/70','65','95','65','Recovering','citalopram'),
+('505911565147','2021-01-28','muscle pain','100/57','70','99','82','Getting Worse','myoril 4mg'),
+('697967634778','2021-02-04','swelling','100/78','50','98','62','Some test tobe done','Aspirin');
+
 
 INSERT INTO MED_HISTORY (AADHAR_NO, S_DATE, E_DATE, SYMPTOMS, DISEASE, MEDICATION, DOC_NAME, STAT) VALUES
-('945632840305','2021-12-05','2021-12-07','Swollen mouth','mouth ulcers','B-complex','Dr. Philip Vaz','Cured'),
-('646787204425','2021-09-21','2021-12-02','Blood in Stool','Ulcerative Collotis','Infliximab, mesacol','Dr. V Gokak','Cured'),
-('646787204425','2021-12-17','2021-12-22','Swelling in legs','Blood clot','Acitron','Dr. Archana Uppin','Cured'),
-('945632840305','2022-01-05',NULL,'Swollen mouth','mouth ulcers','B-complex','Dr. Philip Vaz','Active'),
-('943208807080','2020-05-05','2020-07-01','Swollen hand due to accident','Crack in hand bone','Calcium, Codiene, Tereperatide','Dr. Naveen Angadi','Cured');
+('945632840305','2021-12-05','2021-12-22','Swollen mouth','mouth ulcers','B-complex','Dr. Philip Vaz','Cured'),
+('646787204425','2021-09-21','2021-10-25','Blood in Stool','Ulcerative Collotis','Infliximab, mesacol','Dr. V Gokak','Cured'),
+('646787204425','2021-03-17','2021-03-22','Swelling in legs','Blood clot','Acitron','Dr. Archana Uppin','Cured'),
+('945632840305','2022-04-12',NULL,'Swollen mouth','mouth ulcers','B-complex','Dr. Philip Vaz','Active'),
+('943208807080','2020-05-01','2020-06-11','Swollen hand due to accident','Crack in hand bone','Calcium, Codiene, Tereperatide','Dr. Naveen Angadi','Cured'),
+('945632840305','2019-01-10','2021-02-05','skin rashes','diaberes','dicloxacillin','Dr. Philip Vaz','Cured'),
+('945632840305','2020-02-12','2021-02-25','feelings of sadness','depression','citalopram','Dr. Praveen Kumar','Cured'),
+('945632840305','2021-04-10','2021-04-22','muscle pain','lupus','myoril 4mg','Dr. V Gokak','Cured'),
+('945632840305','2021-10-12','2021-10-20','swelling','yeast infection','Aspirin','Dr. Archana Uppin','Cured'),
+('945632840305','2021-02-05','2021-03-11','runny nose','Colds and flu','crocin','Dr. Naveen Angadi','Cured');
 
 INSERT INTO OTHER_MED (AADHAR_NO, MEDS, ALLERGIES, INJURY) VALUES
 ('945632840305',NULL,'Dust','Fracture in hand'),
