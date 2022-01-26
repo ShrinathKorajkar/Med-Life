@@ -59,11 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Update the record
     $sno = $_POST["snoEdit"];
     $SdateEdit = $_POST["SdateEdit"];
-    if (isset($_POST["EdateEdit"])) {
-      $EdateEdit = $_POST["EdateEdit"];
-    } else {
-      $EdateEdit = NULL;
-    }
+    $EdateEdit = $_POST["EdateEdit"];
     $SympEdit = $_POST["SympEdit"];
     $DiseaseEdit = $_POST["DiseaseEdit"];
     $MedEdit = $_POST["MedEdit"];
@@ -81,11 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
 
     $S_DATE = $_POST["Start-date"];
-    if (isset($_POST["End-date"])) {
-      $E_DATE = $_POST["End-date"];
-    } else {
-      $E_DATE = 'NULL';
-    }
+    $E_DATE = $_POST["End-date"];
     $SYMPTOMS = $_POST["Symptoms"];
     $DISEASE = $_POST["Disease"];
     $MEDICATION = $_POST["Medication"];
@@ -298,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                               <label class="col visually-hidden" for="add-column">Start-date</label>
                               <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus=(this.type="date") onblur=(this.type="text") required>
                               <label class="col visually-hidden" for="add-column">End-date</label>
-                              <input type="text" class="form-control" id="add-column" name="End-date" placeholder="End-date" onfocus=(this.type="date") onblur=(this.type="text")>
+                              <input type="text" class="form-control" id="Edate" name="End-date" placeholder="End-date" onfocus=(this.type="date") onblur=(this.type="text")>
                               <label class="col visually-hidden" for="add-column">Symptoms</label>
                               <input type="text" class="form-control" id="add-column" name="Symptoms" placeholder="Symptoms" required>
                               <label class="col visually-hidden" for="add-column">Disease</label>
@@ -344,7 +336,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<tr>
                           <th scope='row'>" .  $sno . "</th>
                           <td>" . $row['S_DATE'] . " </td>";
-                        if ($row['E_DATE'] == NULL) {
+                        if ($row['E_DATE'] == '0000-00-00') {
                           echo "<td>Active</td>";
                         } else {
                           echo "<td>" . $row['E_DATE'] . "</td>";
