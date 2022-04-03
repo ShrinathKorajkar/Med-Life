@@ -1,58 +1,11 @@
 <?php
 // session_start
 session_start();
-include "dbconnect.php";
-$update = false;
-$showAlert = false;
-$delete = false;
-$error = false;
-$userlog = false;
-$aadhar_no = NULL;
-$doclog = false;
-$docname = NULL;
-if (isset($_SESSION['doclog'])) {
-  $doclog = true;
-  $docname = $_SESSION['docname'];
-}
-if (isset($_SESSION['userlog'])) {
-  $userlog = true;
-  $aadhar_no = $_SESSION['aadhar_no'];
-  $sql = "Select `username` from `user` where `aadhar_no`='$aadhar_no'";
-  $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_assoc($result);
-  $username = $row['username'];
-} else {
-  echo '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">SORRY!</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-          <p>you are not logged in </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>';
-  header("location: index.php");
-}
+require "dbconnect.php";
+$page = "DIAGNOSE";
+include "loginheader.php";
 
-
-if (isset($_GET['delete'])) {
-  $sno = $_GET['delete'];
-  $sql = "DELETE FROM `DIAGNOSE` WHERE `SNO` = $sno";
-  $result = mysqli_query($conn, $sql);
-  if ($result) {
-    $delete = true;
-  }
-}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
 
   if (isset($_POST['snoEdit'])) {
     // Update the record
@@ -93,196 +46,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 }
+
+include "header.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-  <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="assets/stylesheet.css" />
-
-  <title>Med Life</title>
-
-  <style>
-    input[type=date]::-webkit-datetime-edit-year-field:not([aria-valuenow]),
-    input[type=date]::-webkit-datetime-edit-month-field:not([aria-valuenow]),
-    input[type=date]::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
-      color: transparent;
-    }
-  </style>
-</head>
-
-<body class="bg-warning bg-opacity-10 records">
-  <header>
-    <div class="container-fluid" style="background-color: white;">
-      <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
-    </div>
-    <div class="sticky-top">
-      <nav class="navbar navbar-expand-sm navbar-light bg-secondary bg-gradient">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.php">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
-              </li>
+<main style="overflow: scroll;">
+  <section>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl  modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-  <main style="overflow: scroll;">
-    <section>
-      <?php
-      if ($update) {
-        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Success!</strong> Records Updated
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div> ';
-      }
-      if ($showAlert) {
-        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Success!</strong> Records Inserted successfully
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div> ';
-      }
-      if ($delete) {
-        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Success!</strong> Records Deleted successfully
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div> ';
-      }
-      if ($error) {
-        echo '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">SORRY!</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+
+          <form action="/dbms_miniproject/diagnosis.php" method="post">
             <div class="modal-body">
-            <p>Error occured while Processing Your request</p>
+              <input type="hidden" name="snoEdit" id="snoEdit">
+              <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
+                <label class="col visually-hidden" for="AppeEdit">Appeareance</label>
+                <input type="text" class="form-control" id="AppeEdit" name="AppeEdit" placeholder="Appeareance" required>
+                <label class="col visually-hidden" for="BpEdit">BP</label>
+                <input type="text" class="form-control" id="BpEdit" name="BpEdit" placeholder="Bp" required>
+                <label class="col visually-hidden" for="MassEdit">Mass</label>
+                <input type="text" class="form-control" id="MassEdit" name="MassEdit" placeholder="Mass" required>
+                <label class="col visually-hidden" for="TempEdit">Temperature</label>
+                <input type="text" class="form-control" id="TempEdit" name="TempEdit" placeholder="Temperature" required>s
+              </div>
+              <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
+                <label class="col visually-hidden" for="PulseEdit">Pulse</label>
+                <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Pulse" required>
+                <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
+                <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Remarks" required>
+                <label class="col visually-hidden" for="MedicationEdit">Medication</label>
+                <input type="text" class="form-control" id="MedicationEdit" name="MedicationEdit" placeholder="Medication" required>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
-          </div>
-        </div>
-      </div>';
-      }
+          </form>
 
-      ?>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl  modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <form action="/dbms_miniproject/diagnosis.php" method="post">
-              <div class="modal-body">
-                <input type="hidden" name="snoEdit" id="snoEdit">
-                <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
-                  <label class="col visually-hidden" for="AppeEdit">Appeareance</label>
-                  <input type="text" class="form-control" id="AppeEdit" name="AppeEdit" placeholder="Appeareance" required>
-                  <label class="col visually-hidden" for="BpEdit">BP</label>
-                  <input type="text" class="form-control" id="BpEdit" name="BpEdit" placeholder="Bp" required>
-                  <label class="col visually-hidden" for="MassEdit">Mass</label>
-                  <input type="text" class="form-control" id="MassEdit" name="MassEdit" placeholder="Mass" required>
-                  <label class="col visually-hidden" for="TempEdit">Temperature</label>
-                  <input type="text" class="form-control" id="TempEdit" name="TempEdit" placeholder="Temperature" required>s
-                </div>
-                <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
-                  <label class="col visually-hidden" for="PulseEdit">Pulse</label>
-                  <input type="text" class="form-control" id="PulseEdit" name="PulseEdit" placeholder="Pulse" required>
-                  <label class="col visually-hidden" for="RemarksEdit">Remarks</label>
-                  <input type="text" class="form-control" id="RemarksEdit" name="RemarksEdit" placeholder="Remarks" required>
-                  <label class="col visually-hidden" for="MedicationEdit">Medication</label>
-                  <input type="text" class="form-control" id="MedicationEdit" name="MedicationEdit" placeholder="Medication" required>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-            </form>
-
-          </div>
         </div>
       </div>
-    </section>
-    <section class="container overflow-scroll">
-      <div class="container-fluid  lh-lg  text-center text-success m-auto text-decoration-underline"></div>
-      <div class="card">
-        <div class="card-header fw-bold h1 fw-bold text-center text-success  text-decoration-underline bg-warning bg-gradient bg-opacity-50">
-          PATIENT RECORDS
-        </div>
+    </div>
+  </section>
+  <section class="container overflow-scroll">
 
-        <div class="card-body">
-          <div class="row my-3 mx-2">
-            <?php
+    <?php
+    include 'errormsg.php';
 
-            echo "<div class='card-title col h4'>AADHAR NO : " . $aadhar_no . "</div>
-                  <div class='card-title col h4'>NAME : " . $username . "</div>";
-            if ($userlog) {
-
-              echo "<a class='btn btn-primary card-title col-2' href='logoutuser.php' role='button'>User logout</a>";
-            }
-            if ($doclog) {
-
-              echo "<a class='btn btn-primary card-title col col-2' href='logoutdoc.php' role='button'>Doc logout</a>";
-            }
-
-            ?>
-          </div>
-          <div class="accordion accordion-flush" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <h5 class="card-title">DIAGNOSIS</h5>
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body ">
-                  <?php
-
-                  if ($doclog) {
-                    echo '<div class="container-fluid mt-2 mb-5">
+    if ($doclog) {
+      echo '<div class="container-fluid mt-2 mb-5">
                  
                           <h5 class="card-text">Add New entry</h5>
                           <form action="/dbms_miniproject/diagnosis.php" method="POST">
@@ -306,36 +123,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                           </form>
                         </div>';
-                  }
-                  ?>
-                  <table class="table table-dark" id="myTable1">
-                    <thead>
-                      <tr>
-                        <th scope="col">Sno</th>
-                        <th scope="col">T_DATE</th>
-                        <th scope="col">APPEAREANCE</th>
-                        <th scope="col" class="text-center"> BP (mm/Hg)</th>
-                        <th scope="col" class="text-center">MASS (kg)</th>
-                        <th scope="col" class="text-center">TEMP (°C)</th>
-                        <th scope="col" class="text-center">PULSE (bpm)</th>
-                        <th scope="col">REMARKS</th>
-                        <th scope="col">MEDICATION</th>
-                        <?php
-                        if ($doclog) {
-                          echo "<th scope='col'>Edit</th>";
-                        }
-                        ?>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
+    }
+    ?>
+    <table class="table table-dark" id="myTable1">
+      <thead>
+        <tr>
+          <th scope="col">Sno</th>
+          <th scope="col">T_DATE</th>
+          <th scope="col">APPEAREANCE</th>
+          <th scope="col" class="text-center"> BP (mm/Hg)</th>
+          <th scope="col" class="text-center">MASS (kg)</th>
+          <th scope="col" class="text-center">TEMP (°C)</th>
+          <th scope="col" class="text-center">PULSE (bpm)</th>
+          <th scope="col">REMARKS</th>
+          <th scope="col">MEDICATION</th>
+          <?php
+          if ($doclog) {
+            echo "<th scope='col'>Edit</th>";
+          }
+          ?>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
 
-                      $sno = 0;
-                      $sql = "SELECT * FROM `DIAGNOSE` WHERE `AADHAR_NO` = '$aadhar_no'";
-                      $result3 = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_assoc($result3)) {
-                        $sno = $sno + 1;
-                        echo "<tr>
+        $sno = 0;
+        $sql = "SELECT * FROM `DIAGNOSE` WHERE `AADHAR_NO` = '$aadhar_no'";
+        $result3 = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result3)) {
+          $sno = $sno + 1;
+          echo "<tr>
                           <th scope='row'>" .  $sno . "</th>
                           <td>" . $row['T_DATE'] . " </td>
                            <td>" . $row['APPEAREANCE'] . "</td>
@@ -348,70 +165,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           <td>" . $row['MEDICATION'] . "</td>";
 
 
-                        if ($doclog) {
-                          echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
-                        }
-                        echo "</tr>";
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="container mb-4">
-            <?php
-            if ($doclog) {
-              echo '<a class="btn btn-success col col-2" href="records.php" role="button">Records</a>';
-            }
-            ?>
-          </div>
-        </div>
-      </div>
-
-    </section>
-  </main>
-  <footer class="text-center text-lg-start bg-dark text-light">
-    <section class="d-flex justify-content-center justify-content-between p-4 border-bottom">
-
-      <div class="me-5">
-        <span>Get connected with us on social networks:</span>
-      </div>
-      <section>
-        <div class="about_handle">
-          <i class="bi bi-youtube">YouTube</i>&ThickSpace;|&ThickSpace;
-          <i class="bi bi-instagram">Instagram</i>&ThickSpace;|&ThickSpace;
-          <i class="bi-github" role="img" aria-label="GitHub">Github</i>&ThickSpace;|&ThickSpace;
-          <i class="bi-twitter">Twitter</i>&ThickSpace;|&ThickSpace;
-          <i class="bi-facebook">Facebook</i>&ThickSpace;|&ThickSpace;
-        </div>
-      </section>
-
-    </section>
-    <section>
-      <div class="container text-center text-md-start">
-        <div class="row">
-          <div class="col align-self-center">
-            <h4 class="text-uppercase text-center fw-bold ">
-              MEDLIFE
-            </h4>
-            <p class="lead lh-lg text-center">
-              Design, Developed, Maintained By <strong>&Tab; SHRINATH KORAJKAR </strong> And <strong> PRATHAMESH CHOUGULE </strong>
-            </p>
-          </div>
-    </section>
-    <div class="text-center " style="background-color: rgba(0, 0, 0, 0.05);">
-      © 2021 Copyright:
-      <a class="text-reset fw-bold" href="#">MEDLIFE.COM</a>
+          if ($doclog) {
+            echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
+          }
+          echo "</tr>";
+        }
+        ?>
+      </tbody>
+    </table>
     </div>
-  </footer>
-</body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script async src="assets/script.js"></script>
-<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    </div>
+    </div>
+
+    </div>
+    <div class="container mb-4">
+      <?php
+      if ($doclog) {
+        echo '<a class="btn btn-success col col-2" href="records.php" role="button">Records</a>';
+      }
+      ?>
+    </div>
+    </div>
+    </div>
+
+  </section>
+</main>
+
 <script>
   $(document).ready(function() {
     $('#myTable1').DataTable();
@@ -464,4 +243,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   })
 </script>
 
-</html>s
+<?php
+include 'footer.php';
+?>
