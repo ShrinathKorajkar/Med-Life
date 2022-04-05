@@ -1,0 +1,18 @@
+.index,
+.records,
+.diagnose
+ {
+  background-image: url(../images/background2.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.doc,
+.sign_in,
+.user {
+  background-image: url(../images/background1.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: fill;
+}

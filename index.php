@@ -9,12 +9,12 @@ include "header.php";
 ?>
 
 
-<main class="d-grid p-2" style="overflow: scroll;">
+<main class="d-grid p-2 index">
   <section>
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <h2 class="text-center fw-bold text-primary m-0">WELCOME TO MEDLIFE</h2>
-        <h6 class="text-center fw-bold text-danger m-0"> YOUR PERSONAL MEDICAL DATABASE</h6>
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center align-items-center">
+        <h2 class="text-center fw-bold text-primary ">WELCOME TO MEDLIFE</h2>
+        <h6 class="text-center fw-bold text-danger "> YOUR PERSONAL MEDICAL DATABASE</h6>
         <div class="col">
           <div class="card" style="border-radius: 1rem;">
             <div class="row g-0">

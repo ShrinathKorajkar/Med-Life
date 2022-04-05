@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include "header.php";
 ?>
 
-<main style="overflow: scroll;">
+<main class="diagnose">
   <section>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,7 +93,7 @@ include "header.php";
       </div>
     </div>
   </section>
-  <section class="container overflow-scroll">
+  <section class="container">
 
     <?php
     include 'errormsg.php';

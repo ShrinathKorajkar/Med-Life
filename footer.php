@@ -1,4 +1,5 @@
 <?php
+$year = date('Y');
 echo '<footer class="text-center text-lg-start bg-dark text-light">
 <section class="d-flex justify-content-center justify-content-between p-4 border-bottom">
 
@@ -29,7 +30,7 @@ echo '<footer class="text-center text-lg-start bg-dark text-light">
       </div>
 </section>
 <div class="text-center " style="background-color: rgba(0, 0, 0, 0.05);">
-  © 2021 Copyright:
+  © ' . $year . ' Copyright:
   <a class="text-reset fw-bold" href="#">MEDLIFE.COM</a>
 </div>
 </footer>
@@ -38,4 +39,6 @@ echo '<footer class="text-center text-lg-start bg-dark text-light">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script async src="assets/script.js"></script>
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </html>';

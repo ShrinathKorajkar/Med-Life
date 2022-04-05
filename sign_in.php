@@ -2,29 +2,43 @@
 include "header.php";
 ?>
 
-<main style="overflow: scroll;">
+<main class="sign_in">
+
   <?php
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $showAlert = false;
 
-    include 'dbconnect.php';
-    $name = $_POST["name"];
-    $aadhaar = $_POST["aadhaar"];
-    $age = $_POST["age"];
-    $bloodgroup = $_POST["bloodgroup"];
-    $birthdayDate = $_POST["birthdayDate"];
-    $gender = $_POST["gender"];
-    $phoneNumber = $_POST["phoneNumber"];
-    $emergency = $_POST["emergency"];
+    if (isset($_POST["g-recaptcha-response"])) {
 
+      include 'dbconnect.php';
+      $name = $_POST["name"];
+      $aadhaar = $_POST["aadhaar"];
+      $age = $_POST["age"];
+      $bloodgroup = $_POST["bloodgroup"];
+      $birthdayDate = $_POST["birthdayDate"];
+      $gender = $_POST["gender"];
+      $phoneNumber = $_POST["phoneNumber"];
+      $emergency = $_POST["emergency"];
+      $passwd = $_POST["passwd"];
+      $cpasswd = $_POST["cpasswd"];
+      $captcha = $_POST["g-recaptcha-response"];
+      $seckey = "6LdDm0gfAAAAAGAcY5hXGUR3J9aEcSGNjU8dIEvb";
 
-    $sql1 = "INSERT INTO `user` (`AADHAR_NO`, `USERNAME`) VALUES ('$aadhaar', '$name');";
-    $sql = "INSERT INTO `p_details` (`AADHAR_NO`, `AGE`, `BLOOD_GRP`, `DOB`, `CONTACT_NO`, `ECONTACT_NO`, `GENDER`) VALUES ('$aadhaar', '$age', '$bloodgroup', '$birthdayDate', '$phoneNumber', '$emergency', '$gender');";
-    $result = mysqli_query($conn, $sql);
-    $result1 = mysqli_query($conn, $sql1);
-    if ($result && $result1) {
-      $showAlert = true;
+      $verifyresponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $seckey . '&response=' . $captcha);
+      $responsedata = json_decode($verifyresponse);
+
+      if ($passwd == $cpasswd && $responsedata->success) {
+        $passwd = password_hash($cpasswd, PASSWORD_BCRYPT);
+        $sql1 = "INSERT INTO `user` (`AADHAR_NO`, `USERNAME`, `USER_PASSWORD`) VALUES ('$aadhaar', '$name', '$passwd');";
+        $sql = "INSERT INTO `p_details` (`AADHAR_NO`, `AGE`, `BLOOD_GRP`, `DOB`, `CONTACT_NO`, `ECONTACT_NO`, `GENDER`) VALUES ('$aadhaar', '$age', '$bloodgroup', '$birthdayDate', '$phoneNumber', '$emergency', '$gender');";
+        $result = mysqli_query($conn, $sql);
+        $result1 = mysqli_query($conn, $sql1);
+        if ($result && $result1) {
+          $showAlert = true;
+        }
+      }
     }
+
     if ($showAlert) {
       echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> Regestered Successfully
@@ -62,9 +76,9 @@ include "header.php";
       </div>
     </div>
   </section>
-  <section class="vh-100 ">
-    <div class="container col-10 py-5 h-90">
-      <div class="row  justify-content-center align-items-center h-90">
+  <section>
+    <div class="container col-10 py-5">
+      <div class="row  justify-content-center align-items-center">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
             <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 text-decoration-underline">
@@ -75,33 +89,38 @@ include "header.php";
 
               <div class="row">
                 <div class="col-md-6 mb-4">
-
                   <div class="form-outline">
                     <input type="text" id="name" name="name" required class="form-control form-control-lg" />
                     <label class="form-label" for="name">Name</label>
                   </div>
-
                 </div>
                 <div class="col-md-6 mb-4">
-
                   <div class="form-outline">
                     <input type="tel" id="aadhaar" name="aadhaar" required class="form-control form-control-lg" maxlength="12" minlength="12" />
                     <label class="form-label" for="aadhaar">Aadhaar no</label>
                   </div>
-
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="password" id="passwd" name="passwd" required class="form-control form-control-lg" minlength="4" />
+                    <label class="form-label" for="aadhaar">Password</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="password" id="cpasswd" name="cpasswd" required class="form-control form-control-lg" minlength="4" />
+                    <label class="form-label" for="aadhaar">Confirm Password</label>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-4">
-
                   <div class="form-outline">
                     <input type="number" id="age" name="age" min="1" max="150" required class="form-control form-control-lg" />
                     <label class="form-label" for="age">Age</label>
                   </div>
-
                 </div>
                 <div class="col-md-6 mb-4">
-
                   <div class="form-outline">
                     <select class="form-select form-select-lg" id="bloodgroup" name="bloodgroup" aria-label=".form-select-lg example">
                       <option selected>
@@ -158,7 +177,7 @@ include "header.php";
                   </div>
                 </div>
 
-                <div class="form-check d-flex justify-content-center m-5">
+                <div class="form-check d-flex justify-content-center m-4">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" name="form2Example3c" required />
                   <label class="form-check-label" for="form2Example3">
                     I agree all statements in <button type="button" class="btn btn-light bg-light text-primary btn-outline-light text-decoration-underline" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -166,8 +185,9 @@ include "header.php";
                     </button>
                   </label>
                 </div>
+                <div class="g-recaptcha d-flex justify-content-center m-2" data-sitekey="6LdDm0gfAAAAAPHwTIjMiWiZpQUi7Eyg8Lu88aiy"></div>
                 <div class=" d-flex justify-content-center">
-                  <button type="submit" class="btn btn-block  px-5 text-body" style="background-color:rgba(0, 0, 255, 0.507) ">Register</button>
+                  <button type="submit" class="btn btn-block  px-5 btn-success ">Register</button>
                 </div>
             </form>
           </div>

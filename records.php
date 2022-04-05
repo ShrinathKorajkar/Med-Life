@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include "header.php";
 ?>
 
-<main style="overflow: scroll;">
+<main class="records">
   <section>
 
     <!-- Modal -->
@@ -93,7 +93,7 @@ include "header.php";
       </div>
     </div>
   </section>
-  <section class="container overflow-scroll">
+  <section class="container">
 
     <?php
     include 'errormsg.php';

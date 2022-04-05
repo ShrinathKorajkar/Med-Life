@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2022 at 12:46 PM
+-- Generation Time: Apr 05, 2022 at 10:24 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -72,7 +72,7 @@ INSERT INTO `doc` (`DOC_ID`, `DOC_NAME`, `PASSWORDS`) VALUES
 ('BEG4546347', 'Dr. Praveen Kumar', '$2y$10$lf0jwOySssVlVHj/dmYV2uH5gB.k8HZ1Ogfu78Rih0b73JPRbOYkq'),
 ('BEG7848058', 'Dr. Naveen Angadi', '$2y$10$sCWLddkRcTnRO8fJ9kH2We7Q/WXVDgHyU8gT/G4AQEy3ApzeCppda'),
 ('BEG8225210', 'Dr. Archana Uppin', '$2y$10$30H8wws3myPQpK./kaQFi.lBq2E1H2EDeKOhiHHcErx1cR/b8tLdC'),
-('BEG9543210', 'Dr. V Gokak', '$2y$10$0rrfIChWOWgy5ciIx77F8OyB1.x1kd.8661kg1yXERV/Lxbx4CcrK');
+('BEG9543210', 'Dr. V Gokak', '12345');
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ INSERT INTO `med_history` (`SNO`, `AADHAR_NO`, `S_DATE`, `E_DATE`, `SYMPTOMS`, `
 (7, '945632840305', '2020-02-12', '2021-02-25', 'feelings of sadness', 'depression', 'citalopram', 'Dr. Praveen Kumar', 'Cured'),
 (8, '945632840305', '2021-04-10', '2021-04-22', 'muscle pain', 'lupus', 'myoril 4mg', 'Dr. V Gokak', 'Cured'),
 (9, '945632840305', '2021-10-12', '2021-10-20', 'swelling', 'yeast infection', 'Aspirin', 'Dr. Archana Uppin', 'Cured'),
-(10, '945632840305', '2021-02-05', '2021-03-11', 'runny nose', 'Colds and flu', 'crocin', 'Dr. Naveen Angadi', 'Cured');
+(10, '945632840305', '2021-02-05', '2021-03-11', ' runny nose', 'Colds and flu', 'crocin', '', 'Cured');
 
 -- --------------------------------------------------------
 
@@ -159,7 +159,8 @@ INSERT INTO `p_details` (`SNO`, `AADHAR_NO`, `AGE`, `BLOOD_GRP`, `DOB`, `CONTACT
 (2, '646787204425', 40, 'A +ve', '1980-04-24', '9164073799', '9341960712', 'Female'),
 (3, '943208807080', 50, 'AB +v', '1970-07-07', '9341960712', '7848058034', 'Male'),
 (4, '505911565147', 20, 'B +ve', '2001-07-18', '7619153471', '9591690590', 'Male'),
-(5, '697967634778', 58, 'O +ve', '1963-04-08', '9591690590', '7619153471', 'Female');
+(5, '697967634778', 58, 'O +ve', '1963-04-08', '9591690590', '7619153471', 'Female'),
+(6, '964738151477', 21, 'O +ve', '2001-01-29', '9538704546', '7848058034', 'female');
 
 -- --------------------------------------------------------
 
@@ -169,19 +170,20 @@ INSERT INTO `p_details` (`SNO`, `AADHAR_NO`, `AGE`, `BLOOD_GRP`, `DOB`, `CONTACT
 
 CREATE TABLE `user` (
   `AADHAR_NO` decimal(12,0) NOT NULL,
-  `USERNAME` varchar(25) NOT NULL
+  `USERNAME` varchar(25) NOT NULL,
+  `USER_PASSWORD` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`AADHAR_NO`, `USERNAME`) VALUES
-('505911565147', 'Prathamesh Chougule'),
-('646787204425', 'Sunanda Korajkar'),
-('697967634778', 'Seema Chougule'),
-('943208807080', 'Krishna Korajkar'),
-('945632840305', 'Shrinath Korajkar');
+INSERT INTO `user` (`AADHAR_NO`, `USERNAME`, `USER_PASSWORD`) VALUES
+('505911565147', 'Prathamesh Chougule', '$2y$10$ATjS96hQhTwnspb2xDJtRuWtXyGRPBiKCCc7/TOOblkwdNk6bAeQi'),
+('646787204425', 'Sunanda Korajkar', '$2y$10$.Z6dCcQagiLpMA0vMoy6bulcun21pJ7jxG3bW4qR8Ne6WqygN8Wme'),
+('697967634778', 'Seema Chougule', ' $2y$10$ZH2KRQCvfucXij8sL1vKP.LRTQFq5AEH5BjcCjrIFgCCYxQOxZMQ2'),
+('943208807080', 'Krishna Korajkar', '$2y$10$FYMDSTTiZsdNZs.Q.MenJeUUkBEn0AfeebG3UYEOc1z.OvoubE66m'),
+('945632840305', 'Shrinath Korajkar', '$2y$10$XtvEwzU7gqTgbVd.pZ/K9eWV.vzCmJnoP7CFqaGnOFfyWzEtxA7BW');
 
 --
 -- Indexes for dumped tables
@@ -231,13 +233,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `diagnose`
 --
 ALTER TABLE `diagnose`
-  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `med_history`
 --
 ALTER TABLE `med_history`
-  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `other_med`
@@ -249,7 +251,7 @@ ALTER TABLE `other_med`
 -- AUTO_INCREMENT for table `p_details`
 --
 ALTER TABLE `p_details`
-  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
