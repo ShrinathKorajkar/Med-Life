@@ -85,7 +85,7 @@ include "header.php";
               <center> Registration Form</center>
             </h2>
             <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Enter Your Details</h5>
-            <form action="/dbms_miniproject/sign_in.php" method="post">
+            <form action="/MyMedicLife/sign_in.php" method="post">
 
               <div class="row">
                 <div class="col-md-6 mb-4">

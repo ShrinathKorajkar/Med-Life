@@ -22,7 +22,7 @@ echo '<footer class="text-center text-lg-start bg-dark text-light">
     <div class="row">
       <div class="col align-self-center">
         <h4 class="text-uppercase text-center fw-bold ">
-          MEDLIFE
+        MyMedicLife
         </h4>
         <p class="lead lh-lg text-center">
           Design, Developed, Maintained By <strong>&Tab; SHRINATH KORAJKAR </strong> And <strong> PRATHAMESH CHOUGULE </strong>
@@ -31,7 +31,7 @@ echo '<footer class="text-center text-lg-start bg-dark text-light">
 </section>
 <div class="text-center " style="background-color: rgba(0, 0, 0, 0.05);">
   © ' . $year . ' Copyright:
-  <a class="text-reset fw-bold" href="#">MEDLIFE.COM</a>
+  <a class="text-reset fw-bold" href="#">MyMedicLife.COM</a>
 </div>
 </footer>
 </body>

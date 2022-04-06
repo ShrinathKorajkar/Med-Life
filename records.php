@@ -60,7 +60,7 @@ include "header.php";
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <form action="/dbms_miniproject/records.php" method="post">
+          <form action="/MyMedicLife/records.php" method="post">
             <div class="modal-body">
               <input type="hidden" name="snoEdit" id="snoEdit">
               <div class="row input-group row-cols-auto border border-2 border-dark align-items-center my-3">
@@ -102,7 +102,7 @@ include "header.php";
       echo '<div class="container-fluid mt-3 mb-5">
                  
                           <h5 class="card-text">Add New entry</h5>
-                          <form action="/dbms_miniproject/records.php" method="POST">
+                          <form action="/MyMedicLife/records.php" method="POST">
                             <div class="row input-group row-cols-auto border border-2 border-dark align-items-center">
                               <label class="col visually-hidden" for="add-column">Start-date</label>
                               <input type="text" class="form-control" id="add-column" name="Start-date" placeholder="Start-date" onfocus=(this.type="date") onblur=(this.type="text") required>
@@ -313,7 +313,7 @@ include "header.php";
 
       if (confirm("Are you sure you want to delete this entry")) {
         console.log("yes");
-        window.location = `/dbms_miniproject/records.php?delete=${sno}`;
+        window.location = `/MyMedicLife/records.php?delete=${sno}`;
         // TODO: Create a form and use post request to submit a form
       } else {
         console.log("no");

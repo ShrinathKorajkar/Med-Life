@@ -13,8 +13,8 @@ include "header.php";
   <section>
     <div class="container py-5">
       <div class="row d-flex justify-content-center align-items-center">
-        <h2 class="text-center fw-bold text-primary ">WELCOME TO MEDLIFE</h2>
-        <h6 class="text-center fw-bold text-danger "> YOUR PERSONAL MEDICAL DATABASE</h6>
+        <h2 class="text-center fw-bold text-primary ">Welcome To MyMedicLife</h2>
+        <h6 class="text-center fw-bold text-danger "> Your PersonaL Medical Database</h6>
         <div class="col">
           <div class="card" style="border-radius: 1rem;">
             <div class="row g-0">

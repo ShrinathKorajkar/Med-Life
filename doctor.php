@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row g-0">
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
-                  <form action="/dbms_miniproject/doctor.php" method="POST">
+                  <form action="/MyMedicLife/doctor.php" method="POST">
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text" id="doc_id">DOCTOR ID :</span>
