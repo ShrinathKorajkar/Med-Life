@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($row) {
     $verify = password_verify($password, $row['PASSWORDS']);
     if ($verify) {
-      $doc_name = $row['doc_name'];
+      $doc_name = $row['DOC_NAME'];
       $login = true;
       $_SESSION['doclog'] = true;
       $_SESSION['docname'] = $doc_name;

@@ -38,12 +38,14 @@ include "header.php";
         }
       } elseif (isset($_SESSION['doclog'])) {
         $sql = "Select * from user where aadhar_no='$aadhar_no'";
+        $docname = $_SESSION['docname'];
         $result = mysqli_query($conn, $sql);
         $num = mysqli_num_rows($result);
         if ($num == 1) {
           $login = true;
           $_SESSION['userlog'] = true;
           $_SESSION['aadhar_no'] = $aadhar_no;
+          $_SESSION['docname'] = $docname;
           header("location: records.php");
         }
       }

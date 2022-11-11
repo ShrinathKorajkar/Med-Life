@@ -29,7 +29,7 @@ echo '<!DOCTYPE html>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/style.css" />
 
-  <title>Med Life</title>
+  <title>MyMedicLife</title>
 
   <style>
     input[type=date]::-webkit-datetime-edit-year-field:not([aria-valuenow]),
@@ -41,30 +41,32 @@ echo '<!DOCTYPE html>
 </head>
 
 <body>
-  <header>
-    <div class="container-fluid" style="background-color: white;">
-      <img src="images/header.jpeg" class="mx-auto d-block" alt="image header" style="width: 300px; height: 60px; object-fit: fill;"></img>
+<header>
+<div class="container-fluid text-center" style="background-color: white;">
+  <img src="images/logo.jpg" class="m-auto" alt="image header" width="100px">
+  <span class="fw-bold fs-1 text-secondary">My<span class="text-danger">Medic</span><span class="text-success">Life</span>
+  </span></img>
+</div>
+<div class="sticky-top">
+  <nav class="navbar navbar-expand-sm navbar-light bg-secondary bg-gradient">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.php">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
+          </li>
+      </div>
     </div>
-    <div class="sticky-top">
-      <nav class="navbar navbar-expand-sm navbar-light bg-secondary bg-gradient">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.php">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="user.php">userlogin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
-              </li>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>';
+  </nav>
+</div>
+</header>';
