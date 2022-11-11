@@ -124,53 +124,55 @@ include "header.php";
                         </div>';
     }
     ?>
-    <table class="table table-dark table-hover table-striped" id="myTable1">
-      <thead>
-        <tr>
-          <th scope="col">Sno</th>
-          <th scope="col">Start-date</th>
-          <th scope="col">End-date</th>
-          <th scope="col">Symptoms</th>
-          <th scope="col">Disease</th>
-          <th scope="col">Medication</th>
-          <th scope="col">Doc-name</th>
-          <th scope="col">Status</th>
+    <div class="table-responsive">
+      <table class="table table-dark table-hover table-striped" id="myTable1">
+        <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Start-date</th>
+            <th scope="col">End-date</th>
+            <th scope="col">Symptoms</th>
+            <th scope="col">Disease</th>
+            <th scope="col">Medication</th>
+            <th scope="col">Doc-name</th>
+            <th scope="col">Status</th>
+            <?php
+            if ($doclog) {
+              echo "<th scope='col'>Edit</th>";
+            }
+            ?>
+          </tr>
+        </thead>
+        <tbody>
           <?php
-          if ($doclog) {
-            echo "<th scope='col'>Edit</th>";
-          }
-          ?>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
 
-        $sno = 0;
-        $sql = "SELECT * FROM `MED_HISTORY` WHERE `AADHAR_NO` = '$aadhar_no'";
-        $result3 = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result3)) {
-          $sno = $sno + 1;
-          echo "<tr>
+          $sno = 0;
+          $sql = "SELECT * FROM `MED_HISTORY` WHERE `AADHAR_NO` = '$aadhar_no'";
+          $result3 = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result3)) {
+            $sno = $sno + 1;
+            echo "<tr>
                           <th scope='row'>" .  $sno . "</th>
                           <td>" . $row['S_DATE'] . " </td>";
-          if ($row['E_DATE'] == '0000-00-00') {
-            echo "<td>Active</td>";
-          } else {
-            echo "<td>" . $row['E_DATE'] . "</td>";
-          }
-          echo "<td>" . $row['SYMPTOMS'] . "</td>
+            if ($row['E_DATE'] == '0000-00-00') {
+              echo "<td>Active</td>";
+            } else {
+              echo "<td>" . $row['E_DATE'] . "</td>";
+            }
+            echo "<td>" . $row['SYMPTOMS'] . "</td>
                           <td>" . $row['DISEASE'] . "</td>
                           <td>" . $row['MEDICATION'] . "</td>
                           <td>" . $row['DOC_NAME'] . "</td>
                           <td>" . $row['STAT'] . "</td>";
-          if ($doclog) {
-            echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
+            if ($doclog) {
+              echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
+            }
+            echo "</tr>";
           }
-          echo "</tr>";
-        }
-        ?>
-      </tbody>
-    </table>
+          ?>
+        </tbody>
+      </table>
+    </div>
     </div>
     </div>
     </div>
@@ -182,42 +184,44 @@ include "header.php";
       </h2>
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
         <div class="accordion-body my-4">
-          <table class="table table-dark table-hover table-striped" id="myTable2">
-            <thead>
-              <tr>
-                <th scope="col">Daily meds</th>
-                <th scope="col">Allergies</th>
-                <th scope="col">PREVIOUS INJURY</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $sno = 0;
-              $sql = "SELECT * FROM `OTHER_MED` WHERE `AADHAR_NO` = '$aadhar_no'";
-              $result2 = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result2)) {
+          <div class="table-responsive">
+            <table class="table table-dark table-hover table-striped" id="myTable2">
+              <thead>
+                <tr>
+                  <th scope="col">Daily meds</th>
+                  <th scope="col">Allergies</th>
+                  <th scope="col">PREVIOUS INJURY</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $sno = 0;
+                $sql = "SELECT * FROM `OTHER_MED` WHERE `AADHAR_NO` = '$aadhar_no'";
+                $result2 = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($result2)) {
 
-                echo "<tr>";
-                if ($row['MEDS'] == NULL) {
-                  echo "<td>NONE</td>";
-                } else {
-                  echo "<td>" . $row['MEDS'] . "</td>";
+                  echo "<tr>";
+                  if ($row['MEDS'] == NULL) {
+                    echo "<td>NONE</td>";
+                  } else {
+                    echo "<td>" . $row['MEDS'] . "</td>";
+                  }
+                  if ($row['ALLERGIES'] == NULL) {
+                    echo "<td>NONE</td>";
+                  } else {
+                    echo "<td>" . $row['ALLERGIES'] . "</td>";
+                  }
+                  if ($row['INJURY'] == NULL) {
+                    echo "<td>NONE</td>";
+                  } else {
+                    echo "<td>" . $row['INJURY'] . " </td>";
+                  }
+                  echo "</tr>";
                 }
-                if ($row['ALLERGIES'] == NULL) {
-                  echo "<td>NONE</td>";
-                } else {
-                  echo "<td>" . $row['ALLERGIES'] . "</td>";
-                }
-                if ($row['INJURY'] == NULL) {
-                  echo "<td>NONE</td>";
-                } else {
-                  echo "<td>" . $row['INJURY'] . " </td>";
-                }
-                echo "</tr>";
-              }
-              ?>
-            </tbody>
-          </table>
+                ?>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div class="accordion-item">
@@ -228,25 +232,26 @@ include "header.php";
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <table class="table table-dark table-hover table-striped" id="myTable1">
-              <thead>
-                <tr>
-                  <th scope="col">Age</th>
-                  <th scope="col">Blood type</th>
-                  <th scope="col">D.O.B</th>
-                  <th scope="col">Gender</th>
-                  <th scope="col">Phone-no</th>
-                  <th scope="col">Emergency-no</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
+            <div class="table-responsive">
+              <table class="table table-dark table-hover table-striped" id="myTable1">
+                <thead>
+                  <tr>
+                    <th scope="col">Age</th>
+                    <th scope="col">Blood type</th>
+                    <th scope="col">D.O.B</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Phone-no</th>
+                    <th scope="col">Emergency-no</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
 
-                $sno = 0;
-                $sql = "SELECT * FROM `P_details` WHERE `AADHAR_NO` = '$aadhar_no'";
-                $result1 = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result1)) {
-                  echo "<tr>
+                  $sno = 0;
+                  $sql = "SELECT * FROM `P_details` WHERE `AADHAR_NO` = '$aadhar_no'";
+                  $result1 = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result1)) {
+                    echo "<tr>
                           <td>" . $row['AGE'] . " </td>
                           <td>" . $row['BLOOD_GRP'] . "</td>
                           <td>" . $row['DOB'] . "</td>
@@ -254,10 +259,11 @@ include "header.php";
                           <td>" . $row['CONTACT_NO'] . "</td>
                           <td>" . $row['ECONTACT_NO'] . "</td>
                         </tr>";
-                }
-                ?>
-              </tbody>
-            </table>
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

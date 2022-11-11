@@ -1,4 +1,10 @@
 <?php
+if (!isset($userlog)) {
+  $userlog = false;
+}
+if (!isset($doclog)) {
+  $doclog = false;
+}
 echo '<!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +61,7 @@ echo '<!DOCTYPE html>
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="sign_in.php">Register</a>
           </li>
@@ -65,6 +71,21 @@ echo '<!DOCTYPE html>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="doctor.php">doctorlogin</a>
           </li>
+          </ul>';
+if ($userlog) {
+  echo ' 
+          <span class="navbar-text">
+            <a class="nav-link active p-0 my-2 px-sm-3 m-sm-0" aria-current="page" href="logoutuser.php">User logout</a>
+          </span>';
+}
+if ($doclog) {
+  echo ' 
+          <span class="navbar-text">
+            <a class="nav-link active p-0 mt-3 px-sm-3 m-sm-0" aria-current="page" href="logoutdoc.php">Doc logout</a>
+          </span>';
+}
+
+echo '
       </div>
     </div>
   </nav>

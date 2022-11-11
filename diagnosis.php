@@ -125,34 +125,35 @@ include "header.php";
                         </div>';
     }
     ?>
-    <table class="table table-dark" id="myTable1">
-      <thead>
-        <tr>
-          <th scope="col">Sno</th>
-          <th scope="col">T_DATE</th>
-          <th scope="col">APPEAREANCE</th>
-          <th scope="col" class="text-center"> BP (mm/Hg)</th>
-          <th scope="col" class="text-center">MASS (kg)</th>
-          <th scope="col" class="text-center">TEMP (°C)</th>
-          <th scope="col" class="text-center">PULSE (bpm)</th>
-          <th scope="col">REMARKS</th>
-          <th scope="col">MEDICATION</th>
+    <div class="table-responsive">
+      <table class="table table-dark" id="myTable1">
+        <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">T_DATE</th>
+            <th scope="col">APPEAREANCE</th>
+            <th scope="col" class="text-center"> BP (mm/Hg)</th>
+            <th scope="col" class="text-center">MASS (kg)</th>
+            <th scope="col" class="text-center">TEMP (°C)</th>
+            <th scope="col" class="text-center">PULSE (bpm)</th>
+            <th scope="col">REMARKS</th>
+            <th scope="col">MEDICATION</th>
+            <?php
+            if ($doclog) {
+              echo "<th scope='col'>Edit</th>";
+            }
+            ?>
+          </tr>
+        </thead>
+        <tbody>
           <?php
-          if ($doclog) {
-            echo "<th scope='col'>Edit</th>";
-          }
-          ?>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
 
-        $sno = 0;
-        $sql = "SELECT * FROM `DIAGNOSE` WHERE `AADHAR_NO` = '$aadhar_no'";
-        $result3 = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result3)) {
-          $sno = $sno + 1;
-          echo "<tr>
+          $sno = 0;
+          $sql = "SELECT * FROM `DIAGNOSE` WHERE `AADHAR_NO` = '$aadhar_no'";
+          $result3 = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result3)) {
+            $sno = $sno + 1;
+            echo "<tr>
                           <th scope='row'>" .  $sno . "</th>
                           <td>" . $row['T_DATE'] . " </td>
                            <td>" . $row['APPEAREANCE'] . "</td>
@@ -165,14 +166,15 @@ include "header.php";
                           <td>" . $row['MEDICATION'] . "</td>";
 
 
-          if ($doclog) {
-            echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
+            if ($doclog) {
+              echo "<td> <span class='btn-group'><button type='button' class='edit btn btn-sm btn-primary' id=" . $row['SNO'] . ">Edit</button> <button class='delete btn btn-sm btn-danger' id=d" . $row['SNO'] . ">Delete</button>  </td></span>";
+            }
+            echo "</tr>";
           }
-          echo "</tr>";
-        }
-        ?>
-      </tbody>
-    </table>
+          ?>
+        </tbody>
+      </table>
+    </div>
     </div>
     </div>
     </div>
